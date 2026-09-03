@@ -1,0 +1,224 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@astro-fleet/shared-ui/src/layouts/BaseLayout.astro';
+import Breadcrumb from '@astro-fleet/shared-ui/src/components/Breadcrumb.astro';
+import Timeline from '@astro-fleet/shared-ui/src/components/Timeline.astro';
+import CTABlock from '@astro-fleet/shared-ui/src/components/CTABlock.astro';
+import {
+  SITE_NAME,
+  TAGLINE,
+  LOGO_SRC,
+  LOGO_ALT,
+  OG_IMAGE_PATH,
+  OG_IMAGE_ALT,
+  navigation,
+  footerColumns,
+  contactInfo,
+  socialLinks,
+} from '../lib/site-config';
+import { photos } from '../lib/images';
+import { NILE_DUSK } from '../lib/tokens';
+
+const timeline = [
+  {
+    date: '2020',
+    title: 'Practice begins',
+    description:
+      'Arabian Breed Mastery starts in Egypt, focused on soft communication with Arabian horses.',
+  },
+  {
+    date: 'Focus',
+    title: 'Hot horses, quiet hands',
+    description:
+      'Sessions centre on lowering arousal, clarifying the rein, and reading the horse’s body before asking for more.',
+  },
+  {
+    date: 'Today',
+    title: 'Owners and riders',
+    description:
+      'We work with people who already love the breed — and want a calmer, more anatomical way to ride and handle it.',
+  },
+];
+---
+
+<BaseLayout
+  title={`Approach — ${SITE_NAME}`}
+  description="How Arabian Breed Mastery works with soft hand contact, calming techniques, and anatomy — for Arabian horse owners and riders in Egypt since 2020."
+  keywords={['Arabian horse training', 'soft rein', 'equine anatomy', 'Egypt']}
+  {navigation}
+  footerColumns={footerColumns}
+  {contactInfo}
+  {socialLinks}
+  siteName={SITE_NAME}
+  tagline={TAGLINE}
+  logoSrc={LOGO_SRC}
+  logoAlt={LOGO_ALT}
+  ogImage={new URL(OG_IMAGE_PATH, Astro.site).href}
+  ogImageAlt={OG_IMAGE_ALT}
+  ctaText="Book a session"
+  ctaHref="/contact/"
+  designTokens={NILE_DUSK}
+>
+  <div class="container">
+    <Breadcrumb
+      items={[{ label: 'Home', href: '/' }, { label: 'Approach' }]}
+    />
+  </div>
+
+  <section class="abm-page-hero">
+    <div class="container">
+      <div class="abm-eyebrow">Approach</div>
+      <h1>Listen first. Then ask.</h1>
+      <p>
+        Arabian Breed Mastery — Мастерство Арабской Породы — is a practice for
+        people who ride and keep Arabian horses. We specialise in soft hand work,
+        calming “hot” horses, and sessions that respect how the horse is built.
+      </p>
+    </div>
+  </section>
+
+  <figure class="abm-atmosphere">
+    <Image
+      src={photos.aboutAtmosphere.src}
+      alt={photos.aboutAtmosphere.alt}
+      class="abm-atmosphere__img"
+      widths={[800, 1200, 1800]}
+      sizes="100vw"
+      loading="lazy"
+      quality={75}
+    />
+  </figure>
+
+  <section class="section abm-belief">
+    <div class="container abm-belief__inner">
+      <blockquote>
+        A hot Arabian is not a problem to overpower. It is a horse that needs a
+        quieter conversation — through the hand, the seat, and timing that matches
+        its nervous system.
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container abm-method">
+      <div>
+        <div class="abm-eyebrow">Method</div>
+        <h2>What “soft” actually means here.</h2>
+      </div>
+      <ul class="abm-method__list">
+        <li>
+          <strong>Contact without brace.</strong> The rein carries information,
+          not argument. We teach feel that the horse can answer without going
+          against the bit.
+        </li>
+        <li>
+          <strong>Arousal before drills.</strong> If the horse is already
+          spinning up, we lower the temperature first — breath, posture, and
+          smaller asks — then build the skill.
+        </li>
+        <li>
+          <strong>Anatomy as a boundary.</strong> We do not chase shapes that
+          fight the horse’s structure. Softness lasts when the body can hold it.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section abm-timeline-section">
+    <div class="container">
+      <div class="abm-eyebrow">Path</div>
+      <h2 class="abm-timeline-title">From 2020 to the work today.</h2>
+      <Timeline events={timeline} />
+    </div>
+  </section>
+
+  <CTABlock
+    heading="Ready for a quieter session?"
+    description="Tell us about your horse. We will help you decide whether a session is the right next step."
+    primaryButton={{ text: 'Book a session', href: '/contact/' }}
+    secondaryButton={{ text: 'See the work', href: '/services/' }}
+  />
+</BaseLayout>
+
+<style>
+  .abm-atmosphere {
+    margin: 0;
+  }
+
+  .abm-atmosphere__img {
+    display: block;
+    width: 100%;
+    max-height: min(52vh, 520px);
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .abm-belief {
+    padding-top: 0;
+  }
+
+  .abm-belief__inner {
+    max-width: 40rem;
+    margin: 0 auto;
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1.75rem;
+  }
+
+  .abm-belief blockquote {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--color-primary);
+  }
+
+  .abm-method {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .abm-method {
+      grid-template-columns: 0.9fr 1.2fr;
+      gap: 3rem;
+    }
+  }
+
+  .abm-method h2 {
+    font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+    font-weight: 500;
+  }
+
+  .abm-method__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .abm-method__list li {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  .abm-method__list strong {
+    display: block;
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+  }
+
+  .abm-timeline-section {
+    background: var(--color-elevated);
+    border-block: 1px solid var(--color-border);
+  }
+
+  .abm-timeline-title {
+    font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+</style>

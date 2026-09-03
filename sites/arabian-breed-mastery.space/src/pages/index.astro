@@ -1,0 +1,481 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@astro-fleet/shared-ui/src/layouts/BaseLayout.astro';
+import CTABlock from '@astro-fleet/shared-ui/src/components/CTABlock.astro';
+import FAQ from '@astro-fleet/shared-ui/src/components/FAQ.astro';
+import {
+  SITE_NAME,
+  TAGLINE,
+  LOGO_SRC,
+  LOGO_ALT,
+  OG_IMAGE_PATH,
+  OG_IMAGE_ALT,
+  navigation,
+  footerColumns,
+  contactInfo,
+  socialLinks,
+} from '../lib/site-config';
+import { photos } from '../lib/images';
+import { NILE_DUSK } from '../lib/tokens';
+
+const pillars = [
+  {
+    title: 'Soft hand work',
+    body: 'Quiet contact through the rein and body. Less force, clearer answers — so the horse can think instead of brace.',
+    image: photos.pillarHand,
+  },
+  {
+    title: 'Calming hot horses',
+    body: 'Techniques for sensitive, forward, “hot” Arabians: lower arousal, rebuild trust, keep athleticism without the spiral.',
+    image: photos.pillarCalm,
+  },
+  {
+    title: 'Anatomy in the room',
+    body: 'Every ask respects how the horse is built. We work with structure and breath, not against tension.',
+    image: photos.pillarAnatomy,
+  },
+];
+
+const faqItems = [
+  {
+    question: 'Who is this for?',
+    answer:
+      'Owners and riders of Arabian horses who want softer communication — especially with sensitive or “hot” horses that escalate under pressure.',
+  },
+  {
+    question: 'Do you work only with Arabians?',
+    answer:
+      'Arabian Breed Mastery is specialised in the Arabian horse. Sessions are shaped around that breed’s temperament, athleticism, and common patterns of tension.',
+  },
+  {
+    question: 'Where do sessions take place?',
+    answer:
+      'In Egypt, based in Al Maţarīyah, Ad Daqahlīyah. Call or WhatsApp to confirm location and availability for your horse.',
+  },
+  {
+    question: 'How do I book?',
+    answer:
+      'Use WhatsApp or phone (+20 122 060 1781), or send an enquiry on the contact page. We will arrange a time that works for you and your horse.',
+  },
+];
+---
+
+<BaseLayout
+  title={`${SITE_NAME} — Soft work for Arabian horses`}
+  description="Arabian Breed Mastery helps owners and riders of Arabian horses with soft hand work, calming techniques for hot horses, and anatomy-aware sessions. Egypt, since 2020."
+  keywords={[
+    'Arabian horses',
+    'soft hand work',
+    'hot horses',
+    'equine training Egypt',
+    'Arabian breed',
+    'Мастерство Арабской Породы',
+  ]}
+  {navigation}
+  footerColumns={footerColumns}
+  {contactInfo}
+  {socialLinks}
+  siteName={SITE_NAME}
+  tagline={TAGLINE}
+  logoSrc={LOGO_SRC}
+  logoAlt={LOGO_ALT}
+  ogImage={new URL(OG_IMAGE_PATH, Astro.site).href}
+  ogImageAlt={OG_IMAGE_ALT}
+  ctaText="Book a session"
+  ctaHref="/contact/"
+  designTokens={NILE_DUSK}
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: SITE_NAME,
+    alternateName: 'Мастерство Арабской Породы',
+    description:
+      'Soft hand work, calming techniques for hot Arabian horses, and anatomy-aware sessions in Egypt.',
+    foundingDate: '2020',
+    telephone: '+201220601781',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Unnamed road',
+      addressLocality: 'Al Maţarīyah',
+      addressRegion: 'Ad Daqahlīyah',
+      postalCode: '35789',
+      addressCountry: 'EG',
+    },
+    areaServed: 'Egypt',
+  }}
+>
+  <section class="abm-hero" aria-label="Introduction">
+    <Image
+      src={photos.heroDusk.src}
+      alt=""
+      class="abm-hero__photo"
+      widths={[800, 1200, 1800, 2400]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+      quality={80}
+    />
+    <div class="abm-hero__overlay" aria-hidden="true"></div>
+    <div class="abm-hero__grain" aria-hidden="true"></div>
+    <div class="abm-hero__inner">
+      <p class="abm-hero__brand">{SITE_NAME}</p>
+      <p class="abm-hero__alt" lang="ru">Мастерство Арабской Породы</p>
+      <h1 class="abm-hero__title">
+        Quiet hands<br />
+        <em>for hot horses.</em>
+      </h1>
+      <p class="abm-hero__lede">
+        Soft rein work and calming techniques for Arabian horses — shaped by
+        anatomy, not force. For owners and riders who want a clearer conversation
+        with a sensitive partner.
+      </p>
+      <div class="abm-hero__actions">
+        <a href="/contact/" class="abm-btn abm-btn--primary">Book a session</a>
+        <a href="/services/" class="abm-btn abm-btn--ghost abm-btn--on-dark"
+          >How we work</a
+        >
+      </div>
+      <p class="abm-hero__meta">Egypt · Est. 2020</p>
+    </div>
+  </section>
+
+  <section class="section abm-intro">
+    <div class="container abm-intro__grid">
+      <div>
+        <div class="abm-eyebrow">The practice</div>
+        <h2>Work that lowers the noise.</h2>
+      </div>
+      <p>
+        Arabian horses feel everything. When the hand is hard or the ask is
+        unclear, they go forward, brace, or shut down. We teach soft contact,
+        timing, and body awareness so “hot” becomes attentive — not explosive.
+      </p>
+    </div>
+  </section>
+
+  <section class="section abm-pillars">
+    <div class="container">
+      <div class="abm-eyebrow">Three focus areas</div>
+      <h2 class="abm-pillars__title">What owners come for.</h2>
+      <div class="abm-pillars__list">
+        {
+          pillars.map((p, i) => (
+            <article class="abm-pillar">
+              <Image
+                src={p.image.src}
+                alt={p.image.alt}
+                class="abm-pillar__img"
+                widths={[400, 640, 800]}
+                sizes="(min-width: 768px) 30vw, 100vw"
+                loading="lazy"
+                quality={75}
+              />
+              <span class="abm-pillar__num" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3>{p.title}</h3>
+              <p>{p.body}</p>
+            </article>
+          ))
+        }
+      </div>
+      <p class="abm-pillars__link">
+        <a href="/services/">See the full work →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="abm-strip" aria-label="Location and founding">
+    <div class="container abm-strip__row">
+      <div>
+        <span class="abm-strip__label">Based in</span>
+        <strong>Al Maţarīyah, Egypt</strong>
+      </div>
+      <div>
+        <span class="abm-strip__label">Practice since</span>
+        <strong>2020</strong>
+      </div>
+      <div>
+        <span class="abm-strip__label">For</span>
+        <strong>Arabian owners &amp; riders</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="abm-eyebrow">Questions</div>
+      <h2 class="abm-faq-title">Before you book.</h2>
+      <FAQ items={faqItems} />
+    </div>
+  </section>
+
+  <CTABlock
+    heading="Bring your horse into quieter work."
+    description="Tell us about your Arabian and what you want to change. We will reply by phone or WhatsApp to arrange a session."
+    primaryButton={{ text: 'Book a session', href: '/contact/' }}
+    secondaryButton={{ text: 'Our approach', href: '/about/' }}
+  />
+</BaseLayout>
+
+<style>
+  .abm-hero {
+    position: relative;
+    min-height: min(92svh, 820px);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    color: #f3efe8;
+    isolation: isolate;
+  }
+
+  .abm-hero__photo {
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+  }
+
+  .abm-hero__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(12, 20, 34, 0.55) 0%,
+        rgba(12, 20, 34, 0.45) 40%,
+        rgba(12, 20, 34, 0.82) 100%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(12, 20, 34, 0.55) 0%,
+        rgba(12, 20, 34, 0.2) 55%,
+        rgba(12, 20, 34, 0.35) 100%
+      );
+  }
+
+  .abm-hero__grain {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.12;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .abm-hero__inner {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 6rem 1.5rem 4rem;
+  }
+
+  .abm-hero__brand {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #f3efe8;
+    margin-bottom: 0.25rem;
+    animation: abm-rise 0.9s ease both;
+  }
+
+  .abm-hero__alt {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, #f3efe8 55%, transparent);
+    margin-bottom: 1.75rem;
+    animation: abm-rise 0.9s ease 0.08s both;
+  }
+
+  .abm-hero__title {
+    font-size: clamp(2.75rem, 8vw, 4.75rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    color: #f3efe8;
+    margin-bottom: 1.25rem;
+    max-width: 14ch;
+    animation: abm-rise 0.9s ease 0.14s both;
+  }
+
+  .abm-hero__title em {
+    font-style: italic;
+    font-weight: 400;
+    color: color-mix(in srgb, #9ec5c3 90%, #f3efe8);
+  }
+
+  .abm-hero__lede {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: color-mix(in srgb, #f3efe8 78%, transparent);
+    max-width: 38rem;
+    margin-bottom: 2rem;
+    animation: abm-rise 0.9s ease 0.22s both;
+  }
+
+  .abm-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    animation: abm-rise 0.9s ease 0.3s both;
+  }
+
+  .abm-hero__meta {
+    font-size: 0.8125rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, #f3efe8 45%, transparent);
+    animation: abm-rise 0.9s ease 0.36s both;
+  }
+
+  @keyframes abm-rise {
+    from {
+      opacity: 0;
+      transform: translateY(1.1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .abm-hero__brand,
+    .abm-hero__alt,
+    .abm-hero__title,
+    .abm-hero__lede,
+    .abm-hero__actions,
+    .abm-hero__meta {
+      animation: none;
+    }
+  }
+
+  .abm-intro__grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .abm-intro__grid {
+      grid-template-columns: 1fr 1.1fr;
+      gap: 3rem;
+      align-items: end;
+    }
+  }
+
+  .abm-intro h2 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 500;
+  }
+
+  .abm-intro p {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+  }
+
+  .abm-pillars {
+    background: var(--color-elevated);
+    border-block: 1px solid var(--color-border);
+  }
+
+  .abm-pillars__title {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 500;
+    margin-bottom: 2.5rem;
+  }
+
+  .abm-pillars__list {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .abm-pillars__list {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+    }
+  }
+
+  .abm-pillar__img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    margin-bottom: 1.25rem;
+  }
+
+  .abm-pillar__num {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--color-accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .abm-pillar h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .abm-pillar p {
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+  }
+
+  .abm-pillars__link {
+    margin-top: 2.5rem;
+  }
+
+  .abm-pillars__link a {
+    font-weight: 600;
+  }
+
+  .abm-strip {
+    background: var(--color-primary);
+    color: #f3efe8;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .abm-strip__row {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .abm-strip__row {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  .abm-strip__label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, #f3efe8 50%, transparent);
+    margin-bottom: 0.35rem;
+  }
+
+  .abm-strip strong {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 500;
+  }
+
+  .abm-faq-title {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+</style>

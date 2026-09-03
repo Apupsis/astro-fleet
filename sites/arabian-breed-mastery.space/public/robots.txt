@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.arabian-breed-mastery.space/sitemap-index.xml

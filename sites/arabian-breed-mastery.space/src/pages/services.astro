@@ -1,0 +1,251 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@astro-fleet/shared-ui/src/layouts/BaseLayout.astro';
+import Breadcrumb from '@astro-fleet/shared-ui/src/components/Breadcrumb.astro';
+import CTABlock from '@astro-fleet/shared-ui/src/components/CTABlock.astro';
+import {
+  SITE_NAME,
+  TAGLINE,
+  LOGO_SRC,
+  LOGO_ALT,
+  OG_IMAGE_PATH,
+  OG_IMAGE_ALT,
+  navigation,
+  footerColumns,
+  contactInfo,
+  socialLinks,
+} from '../lib/site-config';
+import { photos } from '../lib/images';
+import { NILE_DUSK } from '../lib/tokens';
+
+const offerings = [
+  {
+    title: 'Soft hand work',
+    summary: 'Rein and body contact that the horse can understand.',
+    image: photos.workSoft,
+    points: [
+      'Feel and timing on the rein without pulling contests',
+      'Seat and hand so the ask stays quiet under pressure',
+      'Practical patterns you can take into everyday riding',
+    ],
+  },
+  {
+    title: 'Calming techniques for hot horses',
+    summary: 'Lower arousal first — then ask for the movement you want.',
+    image: photos.workCalm,
+    points: [
+      'Reading early signs of escalation in Arabians',
+      'Down-regulation through smaller asks and clearer timing',
+      'Keeping athleticism without feeding the spiral',
+    ],
+  },
+  {
+    title: 'Anatomy-aware sessions',
+    summary: 'Work that fits how this horse is built today.',
+    image: photos.workAnatomy,
+    points: [
+      'Respect for structure, breath, and existing tension',
+      'Asks that do not fight the body for a pretty shape',
+      'Progress that lasts because the horse can carry it',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title={`Work — ${SITE_NAME}`}
+  description="Soft hand work, calming techniques for hot Arabian horses, and anatomy-aware sessions with Arabian Breed Mastery in Egypt."
+  keywords={[
+    'soft hand work',
+    'hot Arabian horses',
+    'equine anatomy',
+    'horse training Egypt',
+  ]}
+  {navigation}
+  footerColumns={footerColumns}
+  {contactInfo}
+  {socialLinks}
+  siteName={SITE_NAME}
+  tagline={TAGLINE}
+  logoSrc={LOGO_SRC}
+  logoAlt={LOGO_ALT}
+  ogImage={new URL(OG_IMAGE_PATH, Astro.site).href}
+  ogImageAlt={OG_IMAGE_ALT}
+  ctaText="Book a session"
+  ctaHref="/contact/"
+  designTokens={NILE_DUSK}
+>
+  <div class="container">
+    <Breadcrumb items={[{ label: 'Home', href: '/' }, { label: 'Work' }]} />
+  </div>
+
+  <section class="abm-page-hero">
+    <div class="container">
+      <div class="abm-eyebrow">Work</div>
+      <h1>Three ways we help.</h1>
+      <p>
+        Sessions are built around soft communication with Arabian horses —
+        especially sensitive or “hot” partners where force only makes things
+        louder.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container abm-offerings">
+      {
+        offerings.map((o, i) => (
+          <article class="abm-offer">
+            <span class="abm-offer__num" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div class="abm-offer__media">
+              <Image
+                src={o.image.src}
+                alt={o.image.alt}
+                class="abm-offer__img"
+                widths={[480, 720, 960]}
+                sizes="(min-width: 768px) 36vw, 100vw"
+                loading="lazy"
+                quality={75}
+              />
+            </div>
+            <div class="abm-offer__copy">
+              <h2>{o.title}</h2>
+              <p class="abm-offer__summary">{o.summary}</p>
+              <ul>
+                {o.points.map((pt) => (
+                  <li>{pt}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section abm-note">
+    <div class="container abm-note__box">
+      <div class="abm-eyebrow">Honest note</div>
+      <h2>What we do not claim.</h2>
+      <p>
+        We do not invent client lists, competition results, or guaranteed
+        temperaments. Outcomes depend on the horse, the rider, and consistent
+        follow-through between sessions. Ask us what is realistic for your
+        horse when you book.
+      </p>
+    </div>
+  </section>
+
+  <CTABlock
+    heading="Book a session for your Arabian."
+    description="WhatsApp or call +20 122 060 1781, or send an enquiry — we will arrange a time in Egypt."
+    primaryButton={{ text: 'Book a session', href: '/contact/' }}
+    secondaryButton={{ text: 'Read the approach', href: '/about/' }}
+  />
+</BaseLayout>
+
+<style>
+  .abm-offerings {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .abm-offer {
+    display: grid;
+    gap: 1.25rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .abm-offer:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  @media (min-width: 768px) {
+    .abm-offer {
+      grid-template-columns: 4rem 1fr 1.1fr;
+      gap: 2rem;
+      align-items: start;
+      padding: 3rem 0;
+    }
+  }
+
+  .abm-offer__img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  @media (max-width: 767px) {
+    .abm-offer__num {
+      order: -1;
+    }
+  }
+
+  .abm-offer__num {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--color-accent);
+    padding-top: 0.4rem;
+  }
+
+  .abm-offer h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .abm-offer__summary {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.25rem;
+  }
+
+  .abm-offer ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .abm-offer li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: var(--color-text-secondary);
+  }
+
+  .abm-offer li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 0.5rem;
+    height: 1px;
+    background: var(--color-accent);
+  }
+
+  .abm-note {
+    padding-top: 0;
+  }
+
+  .abm-note__box {
+    max-width: 40rem;
+  }
+
+  .abm-note h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .abm-note p {
+    color: var(--color-text-secondary);
+    font-size: 1.0625rem;
+  }
+</style>
