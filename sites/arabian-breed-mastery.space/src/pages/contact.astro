@@ -14,6 +14,8 @@ import {
   socialLinks,
   PHONE_E164,
   WHATSAPP_NUMBER,
+  OG_IMAGE_PATH,
+  OG_IMAGE_ALT,
 } from '../lib/site-config';
 import { NILE_DUSK } from '../lib/tokens';
 
@@ -51,6 +53,8 @@ const contactFaq = [
   ctaText="Book a session"
   ctaHref="/contact/"
   designTokens={NILE_DUSK}
+  ogImage={new URL(OG_IMAGE_PATH, Astro.site).href}
+  ogImageAlt={OG_IMAGE_ALT}
 >
   <div class="container">
     <Breadcrumb

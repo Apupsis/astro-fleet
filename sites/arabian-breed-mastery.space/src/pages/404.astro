@@ -9,6 +9,8 @@ import {
   footerColumns,
   contactInfo,
   socialLinks,
+  OG_IMAGE_PATH,
+  OG_IMAGE_ALT,
 } from '../lib/site-config';
 import { NILE_DUSK } from '../lib/tokens';
 ---
@@ -28,6 +30,8 @@ import { NILE_DUSK } from '../lib/tokens';
   ctaText="Book a session"
   ctaHref="/contact/"
   designTokens={NILE_DUSK}
+  ogImage={new URL(OG_IMAGE_PATH, Astro.site).href}
+  ogImageAlt={OG_IMAGE_ALT}
 >
   <section class="not-found">
     <div class="not-found__container">
