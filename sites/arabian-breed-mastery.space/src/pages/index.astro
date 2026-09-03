@@ -14,9 +14,13 @@ import {
   footerColumns,
   contactInfo,
   socialLinks,
+  WHATSAPP_NUMBER,
 } from '../lib/site-config';
 import { photos } from '../lib/images';
 import { NILE_DUSK } from '../lib/tokens';
+
+const ogImageUrl = new URL(OG_IMAGE_PATH, Astro.site).href;
+const siteUrl = Astro.site!.href;
 
 const pillars = [
   {
@@ -79,30 +83,46 @@ const faqItems = [
   tagline={TAGLINE}
   logoSrc={LOGO_SRC}
   logoAlt={LOGO_ALT}
-  ogImage={new URL(OG_IMAGE_PATH, Astro.site).href}
+  ogImage={ogImageUrl}
   ogImageAlt={OG_IMAGE_ALT}
   ctaText="Book a session"
   ctaHref="/contact/"
   designTokens={NILE_DUSK}
-  structuredData={{
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: SITE_NAME,
-    alternateName: 'Мастерство Арабской Породы',
-    description:
-      'Soft hand work, calming techniques for hot Arabian horses, and anatomy-aware sessions in Egypt.',
-    foundingDate: '2020',
-    telephone: '+201220601781',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Unnamed road',
-      addressLocality: 'Al Maţarīyah',
-      addressRegion: 'Ad Daqahlīyah',
-      postalCode: '35789',
-      addressCountry: 'EG',
+  structuredData={[
+    {
+      '@type': 'LocalBusiness',
+      '@id': new URL('/#localbusiness', Astro.site).href,
+      name: SITE_NAME,
+      alternateName: 'Мастерство Арабской Породы',
+      description:
+        'Soft hand work, calming techniques for hot Arabian horses, and anatomy-aware sessions in Egypt.',
+      url: siteUrl,
+      image: ogImageUrl,
+      foundingDate: '2020',
+      telephone: '+201220601781',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Unnamed road',
+        addressLocality: 'Al Maţarīyah',
+        addressRegion: 'Ad Daqahlīyah',
+        postalCode: '35789',
+        addressCountry: 'EG',
+      },
+      areaServed: 'Egypt',
+      sameAs: [`https://wa.me/${WHATSAPP_NUMBER}`],
     },
-    areaServed: 'Egypt',
-  }}
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqItems.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+  ]}
 >
   <section class="abm-hero" aria-label="Introduction">
     <Image

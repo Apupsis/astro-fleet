@@ -31,11 +31,13 @@ const contactFaq = [
       'Yes — an initial conversation by phone or WhatsApp is often enough to decide whether a session makes sense. In-person visits are arranged case by case.',
   },
   {
-    question: 'Is there a fixed price list?',
+    question: 'How are sessions priced?',
     answer:
-      '[CLIENT TO SUPPLY: session rates and packages.] Until then, ask when you book — we will quote clearly before you commit.',
+      'Rates depend on the horse and the work you want. We quote clearly by phone or WhatsApp before you book — nothing is fixed until you agree.',
   },
 ];
+
+const ogImageUrl = new URL(OG_IMAGE_PATH, Astro.site).href;
 ---
 
 <BaseLayout
@@ -53,8 +55,19 @@ const contactFaq = [
   ctaText="Book a session"
   ctaHref="/contact/"
   designTokens={NILE_DUSK}
-  ogImage={new URL(OG_IMAGE_PATH, Astro.site).href}
+  ogImage={ogImageUrl}
   ogImageAlt={OG_IMAGE_ALT}
+  structuredData={{
+    '@type': 'FAQPage',
+    mainEntity: contactFaq.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  }}
 >
   <div class="container">
     <Breadcrumb
@@ -112,18 +125,20 @@ const contactFaq = [
       </div>
 
       <div class="abm-contact__form">
+        <p class="abm-form-hint">
+          Optional fields: use <strong>Company</strong> for your stable or yard,
+          and <strong>Product interest</strong> for your horse’s name or the
+          focus you want (soft hand, calming, anatomy). Prefer WhatsApp if you
+          want a faster reply.
+        </p>
         <ContactForm
           heading="Send an enquiry"
-          description="We will follow up by phone or WhatsApp. No email address is published yet — WhatsApp is the fastest path."
+          description="We will follow up by phone or WhatsApp. No public email is listed — WhatsApp is the fastest path."
           showWhatsApp={true}
           whatsAppNumber={WHATSAPP_NUMBER}
           whatsAppMessage="Hello — I would like to book a session for my Arabian horse."
-          industries={[
-            'Soft hand work',
-            'Calming a hot horse',
-            'Anatomy-aware session',
-            'General enquiry',
-          ]}
+          successText="Thank you. We will reply by phone or WhatsApp within one working day."
+          errorText="We could not send that just now. Please call or WhatsApp +20 122 060 1781 instead."
         />
       </div>
     </div>
@@ -156,6 +171,19 @@ const contactFaq = [
     display: flex;
     flex-direction: column;
     gap: 2rem;
+  }
+
+  .abm-form-hint {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    max-width: 42rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .abm-form-hint strong {
+    font-weight: 600;
+    color: var(--color-text);
   }
 
   .abm-info__label {

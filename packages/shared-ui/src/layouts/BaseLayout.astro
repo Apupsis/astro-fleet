@@ -15,8 +15,8 @@ export interface Props {
   description: string;
   /** SEO keywords */
   keywords?: string[];
-  /** JSON-LD structured data */
-  structuredData?: Record<string, unknown>;
+  /** JSON-LD structured data (one node or several; merged into SEOHead @graph) */
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
   /** Canonical URL for the page */
   canonicalUrl?: string;
   /** Open Graph image URL */
