@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '@astro-fleet/shared-ui/src/layouts/BaseLayout.astro';
 import Breadcrumb from '@astro-fleet/shared-ui/src/components/Breadcrumb.astro';
 import Timeline from '@astro-fleet/shared-ui/src/components/Timeline.astro';
@@ -8,11 +9,14 @@ import {
   TAGLINE,
   LOGO_SRC,
   LOGO_ALT,
+  OG_IMAGE_PATH,
+  OG_IMAGE_ALT,
   navigation,
   footerColumns,
   contactInfo,
   socialLinks,
 } from '../lib/site-config';
+import { photos } from '../lib/images';
 import { NILE_DUSK } from '../lib/tokens';
 
 const timeline = [
@@ -49,6 +53,8 @@ const timeline = [
   tagline={TAGLINE}
   logoSrc={LOGO_SRC}
   logoAlt={LOGO_ALT}
+  ogImage={new URL(OG_IMAGE_PATH, Astro.site).href}
+  ogImageAlt={OG_IMAGE_ALT}
   ctaText="Book a session"
   ctaHref="/contact/"
   designTokens={NILE_DUSK}
@@ -70,6 +76,18 @@ const timeline = [
       </p>
     </div>
   </section>
+
+  <figure class="abm-atmosphere">
+    <Image
+      src={photos.aboutAtmosphere.src}
+      alt={photos.aboutAtmosphere.alt}
+      class="abm-atmosphere__img"
+      widths={[800, 1200, 1800]}
+      sizes="100vw"
+      loading="lazy"
+      quality={75}
+    />
+  </figure>
 
   <section class="section abm-belief">
     <div class="container abm-belief__inner">
@@ -123,6 +141,18 @@ const timeline = [
 </BaseLayout>
 
 <style>
+  .abm-atmosphere {
+    margin: 0;
+  }
+
+  .abm-atmosphere__img {
+    display: block;
+    width: 100%;
+    max-height: min(52vh, 520px);
+    object-fit: cover;
+    object-position: center;
+  }
+
   .abm-belief {
     padding-top: 0;
   }

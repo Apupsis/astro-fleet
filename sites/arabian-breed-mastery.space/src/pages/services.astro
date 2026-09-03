@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '@astro-fleet/shared-ui/src/layouts/BaseLayout.astro';
 import Breadcrumb from '@astro-fleet/shared-ui/src/components/Breadcrumb.astro';
 import CTABlock from '@astro-fleet/shared-ui/src/components/CTABlock.astro';
@@ -7,17 +8,21 @@ import {
   TAGLINE,
   LOGO_SRC,
   LOGO_ALT,
+  OG_IMAGE_PATH,
+  OG_IMAGE_ALT,
   navigation,
   footerColumns,
   contactInfo,
   socialLinks,
 } from '../lib/site-config';
+import { photos } from '../lib/images';
 import { NILE_DUSK } from '../lib/tokens';
 
 const offerings = [
   {
     title: 'Soft hand work',
     summary: 'Rein and body contact that the horse can understand.',
+    image: photos.workSoft,
     points: [
       'Feel and timing on the rein without pulling contests',
       'Seat and hand so the ask stays quiet under pressure',
@@ -27,6 +32,7 @@ const offerings = [
   {
     title: 'Calming techniques for hot horses',
     summary: 'Lower arousal first — then ask for the movement you want.',
+    image: photos.workCalm,
     points: [
       'Reading early signs of escalation in Arabians',
       'Down-regulation through smaller asks and clearer timing',
@@ -36,6 +42,7 @@ const offerings = [
   {
     title: 'Anatomy-aware sessions',
     summary: 'Work that fits how this horse is built today.',
+    image: photos.workAnatomy,
     points: [
       'Respect for structure, breath, and existing tension',
       'Asks that do not fight the body for a pretty shape',
@@ -62,6 +69,8 @@ const offerings = [
   tagline={TAGLINE}
   logoSrc={LOGO_SRC}
   logoAlt={LOGO_ALT}
+  ogImage={new URL(OG_IMAGE_PATH, Astro.site).href}
+  ogImageAlt={OG_IMAGE_ALT}
   ctaText="Book a session"
   ctaHref="/contact/"
   designTokens={NILE_DUSK}
@@ -90,6 +99,17 @@ const offerings = [
             <span class="abm-offer__num" aria-hidden="true">
               {String(i + 1).padStart(2, '0')}
             </span>
+            <div class="abm-offer__media">
+              <Image
+                src={o.image.src}
+                alt={o.image.alt}
+                class="abm-offer__img"
+                widths={[480, 720, 960]}
+                sizes="(min-width: 768px) 36vw, 100vw"
+                loading="lazy"
+                quality={75}
+              />
+            </div>
             <div class="abm-offer__copy">
               <h2>{o.title}</h2>
               <p class="abm-offer__summary">{o.summary}</p>
@@ -135,7 +155,7 @@ const offerings = [
 
   .abm-offer {
     display: grid;
-    gap: 1rem;
+    gap: 1.25rem;
     padding: 2.5rem 0;
     border-top: 1px solid var(--color-border);
   }
@@ -146,9 +166,23 @@ const offerings = [
 
   @media (min-width: 768px) {
     .abm-offer {
-      grid-template-columns: 5rem 1fr;
+      grid-template-columns: 4rem 1fr 1.1fr;
       gap: 2rem;
+      align-items: start;
       padding: 3rem 0;
+    }
+  }
+
+  .abm-offer__img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  @media (max-width: 767px) {
+    .abm-offer__num {
+      order: -1;
     }
   }
 
