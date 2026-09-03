@@ -1,0 +1,192 @@
+---
+import BaseLayout from '@astro-fleet/shared-ui/src/layouts/BaseLayout.astro';
+import Breadcrumb from '@astro-fleet/shared-ui/src/components/Breadcrumb.astro';
+import ContactForm from '@astro-fleet/shared-ui/src/components/ContactForm.astro';
+import FAQ from '@astro-fleet/shared-ui/src/components/FAQ.astro';
+import {
+  SITE_NAME,
+  TAGLINE,
+  LOGO_SRC,
+  LOGO_ALT,
+  navigation,
+  footerColumns,
+  contactInfo,
+  socialLinks,
+  PHONE_E164,
+  WHATSAPP_NUMBER,
+} from '../lib/site-config';
+import { NILE_DUSK } from '../lib/tokens';
+
+const contactFaq = [
+  {
+    question: 'How fast do you reply?',
+    answer:
+      'We aim to answer phone and WhatsApp messages within one business day. If you are writing about a specific horse, include breed details, age, and what you want to change.',
+  },
+  {
+    question: 'Can I visit without a horse?',
+    answer:
+      'Yes — an initial conversation by phone or WhatsApp is often enough to decide whether a session makes sense. In-person visits are arranged case by case.',
+  },
+  {
+    question: 'Is there a fixed price list?',
+    answer:
+      '[CLIENT TO SUPPLY: session rates and packages.] Until then, ask when you book — we will quote clearly before you commit.',
+  },
+];
+---
+
+<BaseLayout
+  title={`Contact — ${SITE_NAME}`}
+  description="Book a session with Arabian Breed Mastery in Egypt. Call or WhatsApp +20 122 060 1781, or send an enquiry."
+  keywords={['book horse training', 'Arabian Breed Mastery contact', 'Egypt equine']}
+  {navigation}
+  footerColumns={footerColumns}
+  {contactInfo}
+  {socialLinks}
+  siteName={SITE_NAME}
+  tagline={TAGLINE}
+  logoSrc={LOGO_SRC}
+  logoAlt={LOGO_ALT}
+  ctaText="Book a session"
+  ctaHref="/contact/"
+  designTokens={NILE_DUSK}
+>
+  <div class="container">
+    <Breadcrumb
+      items={[{ label: 'Home', href: '/' }, { label: 'Contact' }]}
+    />
+  </div>
+
+  <section class="abm-page-hero">
+    <div class="container">
+      <div class="abm-eyebrow">Contact</div>
+      <h1>Book a session.</h1>
+      <p>
+        Call or WhatsApp, or send a short enquiry. Tell us about your Arabian and
+        what you want from the work — soft hand, calming a hot horse, or a more
+        anatomical approach.
+      </p>
+    </div>
+  </section>
+
+  <section class="section abm-contact">
+    <div class="container abm-contact__grid">
+      <div class="abm-contact__info">
+        <div class="abm-info">
+          <div class="abm-info__label">Phone / WhatsApp</div>
+          <div class="abm-info__value">
+            <a href={`tel:${PHONE_E164}`}>+20 122 060 1781</a>
+          </div>
+          <a
+            class="abm-info__link"
+            href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello — I would like to book a session for my Arabian horse.')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open WhatsApp →
+          </a>
+        </div>
+
+        <div class="abm-info">
+          <div class="abm-info__label">Address</div>
+          <div class="abm-info__value">
+            Unnamed road<br />
+            Al Maţarīyah, Ad Daqahlīyah 35789<br />
+            Egypt
+          </div>
+        </div>
+
+        <div class="abm-info">
+          <div class="abm-info__label">Practice</div>
+          <div class="abm-info__value">
+            Arabian Breed Mastery<br />
+            <span lang="ru">Мастерство Арабской Породы</span><br />
+            Since 2020
+          </div>
+        </div>
+      </div>
+
+      <div class="abm-contact__form">
+        <ContactForm
+          heading="Send an enquiry"
+          description="We will follow up by phone or WhatsApp. No email address is published yet — WhatsApp is the fastest path."
+          showWhatsApp={true}
+          whatsAppNumber={WHATSAPP_NUMBER}
+          whatsAppMessage="Hello — I would like to book a session for my Arabian horse."
+          industries={[
+            'Soft hand work',
+            'Calming a hot horse',
+            'Anatomy-aware session',
+            'General enquiry',
+          ]}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section abm-contact-faq">
+    <div class="container">
+      <div class="abm-eyebrow">Before you write</div>
+      <h2 class="abm-contact-faq__title">A few practical answers.</h2>
+      <FAQ items={contactFaq} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .abm-contact__grid {
+    display: grid;
+    gap: 3rem;
+  }
+
+  @media (min-width: 900px) {
+    .abm-contact__grid {
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+  }
+
+  .abm-contact__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .abm-info__label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .abm-info__value {
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .abm-info__value a {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .abm-info__link {
+    display: inline-block;
+    margin-top: 0.65rem;
+    font-weight: 600;
+  }
+
+  .abm-contact-faq {
+    background: var(--color-elevated);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .abm-contact-faq__title {
+    font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+</style>

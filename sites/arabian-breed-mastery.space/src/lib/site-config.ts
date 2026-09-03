@@ -8,6 +8,7 @@ import type {
 export const SITE_NAME = 'Arabian Breed Mastery';
 export const TAGLINE = 'Мастерство Арабской Породы · Soft work for hot horses · Egypt, est. 2020';
 export const LOGO_SRC = '/brand/wordmark.svg';
+export const LOGO_ALT = SITE_NAME;
 
 /** Root-relative path; pages must resolve to absolute URL for og:image scrapers. */
 export const OG_IMAGE_PATH = '/images/og-default.jpg';
