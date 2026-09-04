@@ -1,0 +1,94 @@
+---
+import BaseLayout from '@astro-fleet/shared-ui/src/layouts/BaseLayout.astro';
+import LegalPage from '../components/LegalPage.astro';
+import {
+  SITE_NAME,
+  TAGLINE,
+  LOGO_SRC,
+  LOGO_ALT,
+  OG_IMAGE_PATH,
+  OG_IMAGE_ALT,
+  navigation,
+  footerColumns,
+  contactInfo,
+  socialLinks,
+  PHONE_DISPLAY,
+  layoutChrome,
+} from '../lib/site-config';
+import { NILE_DUSK } from '../lib/tokens';
+---
+
+<BaseLayout
+  title={`سياسة الخصوصية — ${SITE_NAME}`}
+  description={`كيف تجمع Arabian Breed Mastery البيانات وتستخدمها عند الحجز عبر الهاتف أو نموذج الاستفسار.`}
+  {navigation}
+  footerColumns={footerColumns}
+  {contactInfo}
+  {socialLinks}
+  siteName={SITE_NAME}
+  tagline={TAGLINE}
+  logoSrc={LOGO_SRC}
+  logoAlt={LOGO_ALT}
+  ogImage={new URL(OG_IMAGE_PATH, Astro.site).href}
+  ogImageAlt={OG_IMAGE_ALT}
+  designTokens={NILE_DUSK}
+  htmlLang={layoutChrome.htmlLang}
+  htmlDir={layoutChrome.htmlDir}
+  locale={layoutChrome.locale}
+  skipLinkText={layoutChrome.skipLinkText}
+  ctaText={layoutChrome.ctaText}
+  ctaHref={layoutChrome.ctaHref}
+  rightsText={layoutChrome.rightsText}
+  showLegalLinks={layoutChrome.showLegalLinks}
+  legalLinks={layoutChrome.legalLinks}
+  navAriaLabel={layoutChrome.navAriaLabel}
+  homeAriaLabel={layoutChrome.homeAriaLabel}
+  menuToggleAriaLabel={layoutChrome.menuToggleAriaLabel}
+  mobileNavAriaLabel={layoutChrome.mobileNavAriaLabel}
+>
+  <LegalPage
+    title="سياسة الخصوصية"
+    eyebrow="قانوني"
+    intro="توضح هذه الصفحة البيانات التي نجمعها عند تواصلك معنا عبر الموقع أو الهاتف، وكيف نستخدمها."
+    sections={[
+      {
+        heading: 'من نحن',
+        paragraphs: [
+          `Arabian Breed Mastery ممارسة لتدريب الخيول العربية في مصر. للاستفسار: ${PHONE_DISPLAY}. [CLIENT TO SUPPLY: الاسم القانوني للكيان إن وُجد.]`,
+        ],
+      },
+      {
+        heading: 'ما نجمعه',
+        paragraphs: [
+          'عند إرسال نموذج الاستفسار: الاسم، ورقم الهاتف، والبريد إن أدخلته، واسم المكان أو موضوع الاهتمام، ورسالة حرة.',
+          'عند الاتصال الهاتفي: ما تخبرنا به عنك وعن حصانك لتنسيق الجلسة.',
+          'لا ندرج بريداً عاماً على الموقع، ولا نجمع بيانات تسويق عبر نشرات بريدية من هذا الموقع حالياً.',
+        ],
+      },
+      {
+        heading: 'لماذا نجمعها',
+        paragraphs: [
+          'للرد على استفسارك، وترتيب الجلسات، والتواصل بشأن المواعيد. لا نبيع بياناتك لأطراف ثالثة.',
+        ],
+      },
+      {
+        heading: 'الحماية التقنية على النموذج',
+        paragraphs: [
+          'يتضمن النموذج حقلاً مخفياً (honeypot) لتقليل الرسائل الآلية. لا يُطلب منك ملؤه.',
+        ],
+      },
+      {
+        heading: 'التحليلات والتتبع',
+        paragraphs: [
+          'لا يحمّل هذا الموقع حالياً أدوات تحليلات من طرف ثالث (مثل Google Analytics). إن أُضيفت لاحقاً، ستُحدَّث هذه الصفحة ولن تُحمَّل أدوات القياس إلا بعد موافقة صريحة حيث يُطلب ذلك.',
+        ],
+      },
+      {
+        heading: 'حقوقك',
+        paragraphs: [
+          `لطلب تصحيح أو حذف بيانات الاستفسار التي أرسلتها، اتصل على ${PHONE_DISPLAY}.`,
+        ],
+      },
+    ]}
+  />
+</BaseLayout>

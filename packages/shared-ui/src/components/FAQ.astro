@@ -13,16 +13,18 @@ export interface Props {
   items: FAQItem[];
   heading?: string;
   description?: string;
+  ariaLabel?: string;
 }
 
 const {
   items,
   heading = 'Frequently Asked Questions',
   description,
+  ariaLabel = 'Frequently asked questions',
 } = Astro.props;
 ---
 
-<section class="faq" aria-label="Frequently asked questions">
+<section class="faq" aria-label={ariaLabel}>
   <div class="faq__container">
     <div class="faq__header">
       <h2 class="faq__heading">{heading}</h2>

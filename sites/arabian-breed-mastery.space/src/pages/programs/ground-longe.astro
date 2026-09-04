@@ -1,0 +1,53 @@
+---
+import BaseLayout from '@astro-fleet/shared-ui/src/layouts/BaseLayout.astro';
+import ProgramDetail from '../../components/ProgramDetail.astro';
+import {
+  SITE_NAME,
+  TAGLINE,
+  LOGO_SRC,
+  LOGO_ALT,
+  OG_IMAGE_PATH,
+  OG_IMAGE_ALT,
+  navigation,
+  footerColumns,
+  contactInfo,
+  socialLinks,
+  layoutChrome,
+} from '../../lib/site-config';
+import { getProgram } from '../../lib/programs';
+import { NILE_DUSK } from '../../lib/tokens';
+
+const program = getProgram('ground-longe')!;
+---
+
+<BaseLayout
+  title={`${program.title} — ${SITE_NAME}`}
+  description={program.metaDescription}
+  keywords={program.keywords}
+  {navigation}
+  footerColumns={footerColumns}
+  {contactInfo}
+  {socialLinks}
+  siteName={SITE_NAME}
+  tagline={TAGLINE}
+  logoSrc={LOGO_SRC}
+  logoAlt={LOGO_ALT}
+  ogImage={new URL(OG_IMAGE_PATH, Astro.site).href}
+  ogImageAlt={OG_IMAGE_ALT}
+  designTokens={NILE_DUSK}
+  htmlLang={layoutChrome.htmlLang}
+  htmlDir={layoutChrome.htmlDir}
+  locale={layoutChrome.locale}
+  skipLinkText={layoutChrome.skipLinkText}
+  ctaText={layoutChrome.ctaText}
+  ctaHref={layoutChrome.ctaHref}
+  rightsText={layoutChrome.rightsText}
+  showLegalLinks={layoutChrome.showLegalLinks}
+  legalLinks={layoutChrome.legalLinks}
+  navAriaLabel={layoutChrome.navAriaLabel}
+  homeAriaLabel={layoutChrome.homeAriaLabel}
+  menuToggleAriaLabel={layoutChrome.menuToggleAriaLabel}
+  mobileNavAriaLabel={layoutChrome.mobileNavAriaLabel}
+>
+  <ProgramDetail {program} />
+</BaseLayout>

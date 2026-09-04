@@ -7,9 +7,10 @@ export interface BreadcrumbItem {
 export interface Props {
   items: BreadcrumbItem[];
   baseUrl?: string;
+  ariaLabel?: string;
 }
 
-const { items, baseUrl = '' } = Astro.props;
+const { items, baseUrl = '', ariaLabel = 'Breadcrumb' } = Astro.props;
 
 // Generate BreadcrumbList JSON-LD structured data
 const breadcrumbSchema = {
@@ -24,7 +25,7 @@ const breadcrumbSchema = {
 };
 ---
 
-<nav class="breadcrumb" aria-label="Breadcrumb">
+<nav class="breadcrumb" aria-label={ariaLabel}>
   <ol class="breadcrumb__list">
     {items.map((item, index) => (
       <li class="breadcrumb__item">
@@ -89,5 +90,9 @@ const breadcrumbSchema = {
   .breadcrumb__separator {
     color: #cbd5e1;
     flex-shrink: 0;
+  }
+
+  :global([dir='rtl']) .breadcrumb__separator {
+    transform: scaleX(-1);
   }
 </style>

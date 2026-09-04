@@ -1,0 +1,218 @@
+---
+import BaseLayout from '@astro-fleet/shared-ui/src/layouts/BaseLayout.astro';
+import Breadcrumb from '@astro-fleet/shared-ui/src/components/Breadcrumb.astro';
+import ContactForm from '../components/ContactForm.astro';
+import FAQ from '@astro-fleet/shared-ui/src/components/FAQ.astro';
+import {
+  SITE_NAME,
+  SLOGAN_AR,
+  TAGLINE,
+  LOGO_SRC,
+  LOGO_ALT,
+  navigation,
+  footerColumns,
+  contactInfo,
+  socialLinks,
+  PHONE_DISPLAY,
+  PHONE_E164,
+  FOUNDING_YEAR,
+  AREA_SERVED,
+  address,
+  OG_IMAGE_PATH,
+  OG_IMAGE_ALT,
+  layoutChrome,
+} from '../lib/site-config';
+import { NILE_DUSK } from '../lib/tokens';
+
+const contactFaq = [
+  {
+    question: 'ما سرعة الرد؟',
+    answer:
+      'نسعى للرد على المكالمات والاستفسارات خلال يوم عمل واحد. إن كنت تكتب عن حصان معيّن، اذكر تفاصيل السلالة والعمر وما تريد تغييره.',
+  },
+  {
+    question: 'هل يمكنني الزيارة دون حصان؟',
+    answer:
+      'نعم — غالباً يكفي حديث أولي عبر الهاتف لتقرير ما إذا كانت الجلسة منطقية. تُرتَّب الزيارات الحضورية حالة بحالة.',
+  },
+  {
+    question: 'كيف تُسعَّر الجلسات؟',
+    answer:
+      'تعتمد الأسعار على الحصان والعمل المطلوب. نعرض السعر بوضوح عبر الهاتف قبل الحجز — ولا شيء يُثبَّت حتى توافق.',
+  },
+];
+
+const ogImageUrl = new URL(OG_IMAGE_PATH, Astro.site).href;
+---
+
+<BaseLayout
+  title={`تواصل — ${SITE_NAME}`}
+  description={`احجز جلسة مع Arabian Breed Mastery في ${AREA_SERVED}. اتصل على ${PHONE_DISPLAY}، أو أرسل استفساراً.`}
+  keywords={['حجز تدريب خيل', 'تواصل Arabian Breed Mastery', 'خيول مصر']}
+  {navigation}
+  footerColumns={footerColumns}
+  {contactInfo}
+  {socialLinks}
+  siteName={SITE_NAME}
+  tagline={TAGLINE}
+  logoSrc={LOGO_SRC}
+  logoAlt={LOGO_ALT}
+  ctaText={layoutChrome.ctaText}
+  ctaHref={layoutChrome.ctaHref}
+  designTokens={NILE_DUSK}
+  ogImage={ogImageUrl}
+  ogImageAlt={OG_IMAGE_ALT}
+  htmlLang={layoutChrome.htmlLang}
+  htmlDir={layoutChrome.htmlDir}
+  locale={layoutChrome.locale}
+  skipLinkText={layoutChrome.skipLinkText}
+  rightsText={layoutChrome.rightsText}
+  showLegalLinks={layoutChrome.showLegalLinks}
+  legalLinks={layoutChrome.legalLinks}
+  navAriaLabel={layoutChrome.navAriaLabel}
+  homeAriaLabel={layoutChrome.homeAriaLabel}
+  menuToggleAriaLabel={layoutChrome.menuToggleAriaLabel}
+  mobileNavAriaLabel={layoutChrome.mobileNavAriaLabel}
+  structuredData={{
+    '@type': 'FAQPage',
+    mainEntity: contactFaq.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  }}
+>
+  <div class="container">
+    <Breadcrumb
+      items={[{ label: 'الرئيسية', href: '/' }, { label: 'تواصل' }]}
+      ariaLabel={layoutChrome.breadcrumbAriaLabel}
+    />
+  </div>
+
+  <section class="abm-page-hero">
+    <div class="container">
+      <div class="abm-eyebrow">تواصل</div>
+      <h1>احجز جلسة.</h1>
+      <p>
+        اتصل، أو أرسل استفساراً موجزاً. أخبرنا عن حصانك العربي وما تريده من العمل —
+        الكوردا الناعمة، ضبط الطبع الحار، أو ركوب أدق.
+      </p>
+    </div>
+  </section>
+
+  <section class="section abm-contact">
+    <div class="container abm-contact__grid">
+      <div class="abm-contact__info">
+        <div class="abm-info">
+          <div class="abm-info__label">الهاتف</div>
+          <div class="abm-info__value">
+            <a href={`tel:${PHONE_E164}`} dir="ltr">{PHONE_DISPLAY}</a>
+          </div>
+        </div>
+
+        <div class="abm-info">
+          <div class="abm-info__label">العنوان</div>
+          <div class="abm-info__value">
+            {address.streetAddress}<br />
+            {address.addressLocality}، {address.addressRegion}{' '}
+            {address.postalCode}<br />
+            {address.countryName}
+          </div>
+        </div>
+
+        <div class="abm-info">
+          <div class="abm-info__label">الممارسة</div>
+          <div class="abm-info__value">
+            <span class="brand-latin">{SITE_NAME}</span><br />
+            {SLOGAN_AR}<br />
+            منذ {FOUNDING_YEAR}
+          </div>
+        </div>
+      </div>
+
+      <div class="abm-contact__form">
+        <p class="abm-form-hint">
+          الحقول الاختيارية: استخدم <strong>الإسطبل أو الساحة</strong> لاسم مكانك،
+          و<strong>موضوع الاهتمام</strong> لاسم حصانك أو البرنامج. يُفضَّل الاتصال
+          الهاتفي إن أردت رداً أسرع.
+        </p>
+        <ContactForm
+          heading="أرسل استفساراً"
+          description="سنعاود الاتصال هاتفياً. لا يوجد بريد عام مدرج — الاتصال أسرع طريق."
+          successText="شكراً لك. سنرد عبر الهاتف خلال يوم عمل واحد."
+          errorText={`تعذّر الإرسال الآن. يُرجى الاتصال على ${PHONE_DISPLAY} بدلاً من ذلك.`}
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section abm-contact-faq">
+    <div class="container">
+      <div class="abm-eyebrow">قبل أن تكتب</div>
+      <FAQ
+        items={contactFaq}
+        heading="إجابات عملية موجزة."
+        ariaLabel={layoutChrome.faqAriaLabel}
+      />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .abm-contact__grid {
+    display: grid;
+    gap: 3rem;
+  }
+
+  @media (min-width: 900px) {
+    .abm-contact__grid {
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+  }
+
+  .abm-contact__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .abm-form-hint {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    max-width: 42rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .abm-form-hint strong {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .abm-info__label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .abm-info__value {
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .abm-info__value a {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .abm-contact-faq {
+    background: var(--color-elevated);
+    border-top: 1px solid var(--color-border);
+  }
+</style>

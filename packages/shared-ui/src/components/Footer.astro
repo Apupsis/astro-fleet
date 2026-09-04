@@ -27,6 +27,17 @@ export interface Props {
   siteName: string;
   year?: number;
   tagline?: string;
+  /** Text after "© {year} {siteName}. " — default English */
+  rightsText?: string;
+  /** Privacy / Terms / Sitemap row. Default true. */
+  showLegalLinks?: boolean;
+  /** When set, replaces the default Privacy / Terms / Sitemap row */
+  legalLinks?: FooterLink[];
+  /** aria-label template; `{platform}` is replaced */
+  socialFollowLabel?: string;
+  privacyLabel?: string;
+  termsLabel?: string;
+  sitemapLabel?: string;
 }
 
 const {
@@ -36,7 +47,22 @@ const {
   siteName,
   year = new Date().getFullYear(),
   tagline,
+  rightsText = 'All rights reserved.',
+  showLegalLinks = true,
+  legalLinks,
+  socialFollowLabel = 'Follow us on {platform}',
+  privacyLabel = 'Privacy Policy',
+  termsLabel = 'Terms of Service',
+  sitemapLabel = 'Sitemap',
 } = Astro.props;
+
+const bottomLegalLinks: FooterLink[] =
+  legalLinks ??
+  [
+    { label: privacyLabel, href: '/privacy-policy' },
+    { label: termsLabel, href: '/terms' },
+    { label: sitemapLabel, href: '/sitemap.xml' },
+  ];
 
 // Hardcoded SVG paths for social icons — safe for set:html. Never derive from user input.
 const socialIcons: Record<string, string> = {
@@ -95,7 +121,7 @@ const socialIcons: Record<string, string> = {
               <a
                 href={link.url}
                 class="footer__social-link"
-                aria-label={`Follow us on ${link.platform}`}
+                aria-label={socialFollowLabel.replace('{platform}', link.platform)}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -126,13 +152,15 @@ const socialIcons: Record<string, string> = {
     <!-- Bottom Bar -->
     <div class="footer__bottom">
       <p class="footer__copyright">
-        &copy; {year} {siteName}. All rights reserved.
+        &copy; {year} {siteName}. {rightsText}
       </p>
-      <div class="footer__bottom-links">
-        <a href="/privacy-policy" class="footer__bottom-link">Privacy Policy</a>
-        <a href="/terms" class="footer__bottom-link">Terms of Service</a>
-        <a href="/sitemap.xml" class="footer__bottom-link">Sitemap</a>
-      </div>
+      {showLegalLinks && (
+        <div class="footer__bottom-links">
+          {bottomLegalLinks.map((link) => (
+            <a href={link.href} class="footer__bottom-link">{link.label}</a>
+          ))}
+        </div>
+      )}
     </div>
   </div>
 </footer>
@@ -326,7 +354,7 @@ const socialIcons: Record<string, string> = {
     .footer__bottom {
       flex-direction: row;
       justify-content: space-between;
-      text-align: left;
+      text-align: start;
     }
   }
 </style>

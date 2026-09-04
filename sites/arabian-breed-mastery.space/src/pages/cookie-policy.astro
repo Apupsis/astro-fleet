@@ -1,0 +1,75 @@
+---
+import BaseLayout from '@astro-fleet/shared-ui/src/layouts/BaseLayout.astro';
+import LegalPage from '../components/LegalPage.astro';
+import {
+  SITE_NAME,
+  TAGLINE,
+  LOGO_SRC,
+  LOGO_ALT,
+  OG_IMAGE_PATH,
+  OG_IMAGE_ALT,
+  navigation,
+  footerColumns,
+  contactInfo,
+  socialLinks,
+  layoutChrome,
+} from '../lib/site-config';
+import { NILE_DUSK } from '../lib/tokens';
+---
+
+<BaseLayout
+  title={`ملفات تعريف الارتباط — ${SITE_NAME}`}
+  description={`استخدام ملفات تعريف الارتباط على موقع Arabian Breed Mastery — ما هو موجود فعلياً اليوم.`}
+  {navigation}
+  footerColumns={footerColumns}
+  {contactInfo}
+  {socialLinks}
+  siteName={SITE_NAME}
+  tagline={TAGLINE}
+  logoSrc={LOGO_SRC}
+  logoAlt={LOGO_ALT}
+  ogImage={new URL(OG_IMAGE_PATH, Astro.site).href}
+  ogImageAlt={OG_IMAGE_ALT}
+  designTokens={NILE_DUSK}
+  htmlLang={layoutChrome.htmlLang}
+  htmlDir={layoutChrome.htmlDir}
+  locale={layoutChrome.locale}
+  skipLinkText={layoutChrome.skipLinkText}
+  ctaText={layoutChrome.ctaText}
+  ctaHref={layoutChrome.ctaHref}
+  rightsText={layoutChrome.rightsText}
+  showLegalLinks={layoutChrome.showLegalLinks}
+  legalLinks={layoutChrome.legalLinks}
+  navAriaLabel={layoutChrome.navAriaLabel}
+  homeAriaLabel={layoutChrome.homeAriaLabel}
+  menuToggleAriaLabel={layoutChrome.menuToggleAriaLabel}
+  mobileNavAriaLabel={layoutChrome.mobileNavAriaLabel}
+>
+  <LegalPage
+    title="سياسة ملفات تعريف الارتباط"
+    eyebrow="قانوني"
+    intro="نوضح هنا ما يستخدمه الموقع فعلياً من تخزين محلي أو ملفات تعريف ارتباط — دون ادعاء أدوات غير مفعّلة."
+    sections={[
+      {
+        heading: 'الوضع الحالي',
+        paragraphs: [
+          'الموقع صفحات ثابتة. لا نضع حالياً ملفات تعريف ارتباط إعلانية أو تحليلات من طرف ثالث.',
+          'قد يضع متصفحك أو شبكة التوصيل (CDN) ملفات تقنية لازمة لتشغيل الصفحة أو الأمان — وهي ليست لأغراض تسويق من جانبنا.',
+        ],
+      },
+      {
+        heading: 'التخزين المحلي',
+        paragraphs: [
+          'لا نخزّن حالياً تفضيل موافقة تحليلات في localStorage، لأن أدوات التحليلات غير مفعّلة على هذا الموقع.',
+          'إن أُضيفت موافقة تحليلات لاحقاً، قد يُحفظ اختيارك محلياً على جهازك فقط، وستُحدَّث هذه الصفحة.',
+        ],
+      },
+      {
+        heading: 'التحكم',
+        paragraphs: [
+          'يمكنك حذف ملفات تعريف الارتباط وبيانات الموقع من إعدادات المتصفح في أي وقت.',
+        ],
+      },
+    ]}
+  />
+</BaseLayout>

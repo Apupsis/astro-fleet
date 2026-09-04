@@ -1,0 +1,82 @@
+---
+import BaseLayout from '@astro-fleet/shared-ui/src/layouts/BaseLayout.astro';
+import LegalPage from '../components/LegalPage.astro';
+import {
+  SITE_NAME,
+  TAGLINE,
+  LOGO_SRC,
+  LOGO_ALT,
+  OG_IMAGE_PATH,
+  OG_IMAGE_ALT,
+  navigation,
+  footerColumns,
+  contactInfo,
+  socialLinks,
+  layoutChrome,
+} from '../lib/site-config';
+import { NILE_DUSK } from '../lib/tokens';
+---
+
+<BaseLayout
+  title={`تحذيرات ومسؤوليات — ${SITE_NAME}`}
+  description={`تحذيرات مهمة حول العمل مع الخيول والمسؤولية عند جلسات Arabian Breed Mastery.`}
+  {navigation}
+  footerColumns={footerColumns}
+  {contactInfo}
+  {socialLinks}
+  siteName={SITE_NAME}
+  tagline={TAGLINE}
+  logoSrc={LOGO_SRC}
+  logoAlt={LOGO_ALT}
+  ogImage={new URL(OG_IMAGE_PATH, Astro.site).href}
+  ogImageAlt={OG_IMAGE_ALT}
+  designTokens={NILE_DUSK}
+  htmlLang={layoutChrome.htmlLang}
+  htmlDir={layoutChrome.htmlDir}
+  locale={layoutChrome.locale}
+  skipLinkText={layoutChrome.skipLinkText}
+  ctaText={layoutChrome.ctaText}
+  ctaHref={layoutChrome.ctaHref}
+  rightsText={layoutChrome.rightsText}
+  showLegalLinks={layoutChrome.showLegalLinks}
+  legalLinks={layoutChrome.legalLinks}
+  navAriaLabel={layoutChrome.navAriaLabel}
+  homeAriaLabel={layoutChrome.homeAriaLabel}
+  menuToggleAriaLabel={layoutChrome.menuToggleAriaLabel}
+  mobileNavAriaLabel={layoutChrome.mobileNavAriaLabel}
+>
+  <LegalPage
+    title="تحذيرات ومسؤوليات"
+    eyebrow="قانوني"
+    intro="العمل مع الخيول ينطوي على مخاطر. اقرأ هذه النقاط قبل الحجز أو الحضور."
+    sections={[
+      {
+        heading: 'مخاطر الفروسية',
+        paragraphs: [
+          'الخيول كائنات قوية وقد تتفاعل فجأة. السقوط والإصابة والضرر للممتلكات ممكنة حتى مع أفضل احتياطات.',
+          'أنت مسؤول عن ارتداء معدات ملائمة واتباع تعليمات السلامة في المكان.',
+        ],
+      },
+      {
+        heading: 'مسؤولية المالك',
+        paragraphs: [
+          'مالك الحصان أو من يمثّله يبقى مسؤولاً عن صحة الحصان وحالته وسلوكه، وعن الإفصاح عن إصابات أو مشاكل معروفة قبل الجلسة.',
+          'الجلسات ليست بديلاً عن الرعاية البيطرية. عند الشك الطبي، راجع طبيباً بيطرياً.',
+        ],
+      },
+      {
+        heading: 'نتائج التدريب',
+        paragraphs: [
+          'لا نضمن طباعاً معيّنة أو نتائج مسابقات أو جداول زمنية ثابتة. يعتمد التقدم على الحصان والفارس والمتابعة بين الجلسات.',
+          'لا نختلق شهادات عملاء أو أرقاماً أو جوائز على هذا الموقع.',
+        ],
+      },
+      {
+        heading: 'الموقع والطرف الثالث',
+        paragraphs: [
+          'إن أُقيمت الجلسة في منشأة يملكها طرف ثالث، تسري أيضاً قواعد تلك المنشأة وتأمينها. [CLIENT TO SUPPLY: أي بنود تأمين أو إخلاء مسؤولية موقّعة عند الحضور.]',
+        ],
+      },
+    ]}
+  />
+</BaseLayout>

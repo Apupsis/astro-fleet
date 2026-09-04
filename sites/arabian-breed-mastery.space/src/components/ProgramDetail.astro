@@ -1,0 +1,147 @@
+---
+import { Image } from 'astro:assets';
+import Breadcrumb from '@astro-fleet/shared-ui/src/components/Breadcrumb.astro';
+import CTABlock from '@astro-fleet/shared-ui/src/components/CTABlock.astro';
+import type { Program } from '../lib/programs';
+import { PHONE_DISPLAY, AREA_SERVED, layoutChrome } from '../lib/site-config';
+
+interface Props {
+  program: Program;
+}
+
+const { program } = Astro.props;
+---
+
+<div class="container">
+  <Breadcrumb
+    items={[
+      { label: 'الرئيسية', href: '/' },
+      { label: 'البرامج', href: '/programs/' },
+      { label: program.title },
+    ]}
+    ariaLabel={layoutChrome.breadcrumbAriaLabel}
+  />
+</div>
+
+<section class="abm-page-hero">
+  <div class="container">
+    <div class="abm-eyebrow">{program.eyebrow}</div>
+    <h1>{program.title}</h1>
+    <p>{program.summary}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container abm-program">
+    <div class="abm-program__media">
+      <Image
+        src={program.image.src}
+        alt={program.image.alt}
+        class="abm-program__img"
+        widths={[480, 720, 960, 1200]}
+        sizes="(min-width: 768px) 48vw, 100vw"
+        loading="eager"
+        fetchpriority="high"
+        quality={75}
+      />
+    </div>
+    <div class="abm-program__copy">
+      <h2>ماذا يشمل العمل.</h2>
+      <ul>
+        {program.points.map((pt) => (
+          <li>{pt}</li>
+        ))}
+      </ul>
+      <div class="abm-program__for">
+        <h2>لمن هذا البرنامج.</h2>
+        <p>{program.forWhom}</p>
+      </div>
+      <p class="abm-program__price">
+        يُعرض السعر بوضوح عبر الهاتف قبل الحجز — ولا شيء يُثبَّت حتى توافق.
+      </p>
+    </div>
+  </div>
+</section>
+
+<CTABlock
+  heading="احجز جلسة لهذا البرنامج."
+  description={`اتصل على ${PHONE_DISPLAY}، أو أرسل استفساراً — سنرتّب وقتاً في ${AREA_SERVED}.`}
+  primaryButton={{ text: 'احجز جلسة', href: '/contact-us/' }}
+  secondaryButton={{ text: 'كل البرامج', href: '/programs/' }}
+/>
+
+<style>
+  .abm-program {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .abm-program {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+  }
+
+  .abm-program__media {
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: color-mix(in srgb, var(--color-border) 55%, transparent);
+    min-width: 0;
+  }
+
+  .abm-program__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  .abm-program__copy h2 {
+    font-size: clamp(1.5rem, 2.5vw, 1.85rem);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  .abm-program__copy ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 2rem;
+  }
+
+  .abm-program__copy li {
+    position: relative;
+    padding-inline-start: 1.25rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .abm-program__copy li::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0;
+    top: 0.65em;
+    width: 0.5rem;
+    height: 1px;
+    background: var(--color-accent);
+  }
+
+  .abm-program__for p {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    max-width: 36rem;
+  }
+
+  .abm-program__price {
+    margin-top: 1.5rem;
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    border-inline-start: 2px solid var(--color-accent);
+    padding-inline-start: 1rem;
+  }
+</style>

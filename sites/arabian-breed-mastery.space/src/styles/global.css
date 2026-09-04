@@ -11,8 +11,9 @@
   --color-text-muted: #6b7280;
   --color-border: #cfc8bc;
   --color-elevated: #f3efe8;
-  --font-heading: 'Cormorant Garamond', Georgia, serif;
-  --font-body: 'Outfit', system-ui, -apple-system, sans-serif;
+  --font-brand: 'Cormorant Garamond', Georgia, serif;
+  --font-heading: 'Amiri', 'Noto Naskh Arabic', serif;
+  --font-body: 'IBM Plex Sans Arabic', system-ui, -apple-system, sans-serif;
 }
 
 *,
@@ -109,18 +110,27 @@ a:hover {
   }
 }
 
-.container {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+/* Arabic UI: do not force Latin-style uppercase on chrome */
+html[dir='rtl'] :where(.header__cta),
+html[dir='rtl'] :where(.footer__column-title) {
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+html[dir='rtl'] :where(.header__cta) {
+  font-family: var(--font-body);
+}
+
+.brand-latin {
+  font-family: var(--font-brand), 'Cormorant Garamond', Georgia, serif;
+  letter-spacing: -0.02em;
 }
 
 .abm-eyebrow {
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
   color: var(--color-accent);
   margin-bottom: 0.85rem;
 }

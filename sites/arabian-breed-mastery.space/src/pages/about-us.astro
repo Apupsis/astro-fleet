@@ -1,0 +1,236 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@astro-fleet/shared-ui/src/layouts/BaseLayout.astro';
+import Breadcrumb from '@astro-fleet/shared-ui/src/components/Breadcrumb.astro';
+import Timeline from '@astro-fleet/shared-ui/src/components/Timeline.astro';
+import CTABlock from '@astro-fleet/shared-ui/src/components/CTABlock.astro';
+import {
+  SITE_NAME,
+  SLOGAN_AR,
+  TAGLINE,
+  LOGO_SRC,
+  LOGO_ALT,
+  OG_IMAGE_PATH,
+  OG_IMAGE_ALT,
+  navigation,
+  footerColumns,
+  contactInfo,
+  socialLinks,
+  FOUNDING_YEAR,
+  AREA_SERVED,
+  layoutChrome,
+} from '../lib/site-config';
+import { photos } from '../lib/images';
+import { NILE_DUSK } from '../lib/tokens';
+
+const timeline = [
+  {
+    date: FOUNDING_YEAR,
+    title: 'بداية الممارسة',
+    description: `تبدأ Arabian Breed Mastery في ${AREA_SERVED}، مركّزة على التواصل الهادئ مع الخيول العربية.`,
+  },
+  {
+    date: 'التركيز',
+    title: 'قيادة بلا صراع',
+    description:
+      'تتمحور الجلسات حول خفض الإثارة، وتوضيح اللجام، وقراءة جسد الحصان قبل طلب المزيد — قيادة تُبنى على الحوار لا على القهر.',
+  },
+  {
+    date: 'اليوم',
+    title: 'مالكو وفرسان',
+    description:
+      'نعمل مع من يحب السلالة بالفعل — ويريد طريقة أهدأ وأكثر احتراماً للتشريح في الركوب والتعامل.',
+  },
+];
+---
+
+<BaseLayout
+  title={`عنّا — ${SITE_NAME}`}
+  description={`فلسفة القيادة بلا صراع لدى Arabian Breed Mastery: تماس هادئ وتهدئة وتشريح — لمالكي وفرسان الخيول العربية في ${AREA_SERVED} منذ ${FOUNDING_YEAR}.`}
+  keywords={['تدريب الخيل العربي', 'قيادة بلا صراع', 'لجام ناعم', 'مصر']}
+  {navigation}
+  footerColumns={footerColumns}
+  {contactInfo}
+  {socialLinks}
+  siteName={SITE_NAME}
+  tagline={TAGLINE}
+  logoSrc={LOGO_SRC}
+  logoAlt={LOGO_ALT}
+  ogImage={new URL(OG_IMAGE_PATH, Astro.site).href}
+  ogImageAlt={OG_IMAGE_ALT}
+  designTokens={NILE_DUSK}
+  htmlLang={layoutChrome.htmlLang}
+  htmlDir={layoutChrome.htmlDir}
+  locale={layoutChrome.locale}
+  skipLinkText={layoutChrome.skipLinkText}
+  ctaText={layoutChrome.ctaText}
+  ctaHref={layoutChrome.ctaHref}
+  rightsText={layoutChrome.rightsText}
+  showLegalLinks={layoutChrome.showLegalLinks}
+  legalLinks={layoutChrome.legalLinks}
+  navAriaLabel={layoutChrome.navAriaLabel}
+  homeAriaLabel={layoutChrome.homeAriaLabel}
+  menuToggleAriaLabel={layoutChrome.menuToggleAriaLabel}
+  mobileNavAriaLabel={layoutChrome.mobileNavAriaLabel}
+>
+  <div class="container">
+    <Breadcrumb
+      items={[{ label: 'الرئيسية', href: '/' }, { label: 'عنّا' }]}
+      ariaLabel={layoutChrome.breadcrumbAriaLabel}
+    />
+  </div>
+
+  <section class="abm-page-hero">
+    <div class="container">
+      <div class="abm-eyebrow">عنّا</div>
+      <h1>أصغِ أولاً. ثم اطلب.</h1>
+      <p>
+        Arabian Breed Mastery — {SLOGAN_AR} — ممارسة مبنية على فلسفة القيادة بلا
+        صراع. نتخصص في عمل اليد الهادئ، وتهدئة الخيول «الحارة»، وجلسات تحترم بنية
+        الحصان.
+      </p>
+    </div>
+  </section>
+
+  <figure class="abm-atmosphere">
+    <Image
+      src={photos.aboutAtmosphere.src}
+      alt={photos.aboutAtmosphere.alt}
+      class="abm-atmosphere__img"
+      widths={[800, 1200, 1800]}
+      sizes="100vw"
+      loading="lazy"
+      quality={75}
+    />
+  </figure>
+
+  <section class="section abm-belief">
+    <div class="container abm-belief__inner">
+      <blockquote>
+        الحصان العربي الحار ليس مشكلة تُقهَر بالقوة. إنه حصان يحتاج حواراً أهدأ —
+        عبر اليد والمقعد والتوقيت الذي يلائم جهازه العصبي.
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container abm-method">
+      <div>
+        <div class="abm-eyebrow">الأسلوب</div>
+        <h2>ماذا يعني «الهدوء» هنا فعلياً.</h2>
+      </div>
+      <ul class="abm-method__list">
+        <li>
+          <strong>تماس بلا تصلّب.</strong> يحمل اللجام معلومات لا جدالاً. نعلّم
+          إحساساً يستطيع الحصان الرد عليه دون مقاومة اللجام.
+        </li>
+        <li>
+          <strong>الإثارة قبل التدريبات.</strong> إذا كان الحصان يتصاعد بالفعل،
+          نخفض الحرارة أولاً — تنفّساً ووضعاً وطلبات أصغر — ثم نبني المهارة.
+        </li>
+        <li>
+          <strong>التشريح كحدّ.</strong> لا نطارد أشكالاً تحارب بنية الحصان.
+          الهدوء يدوم حين يستطيع الجسد حمله.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section abm-timeline-section">
+    <div class="container">
+      <div class="abm-eyebrow">المسار</div>
+      <h2 class="abm-timeline-title">من {FOUNDING_YEAR} إلى العمل اليوم.</h2>
+      <Timeline events={timeline} ariaLabel={layoutChrome.timelineAriaLabel} />
+    </div>
+  </section>
+
+  <CTABlock
+    heading="هل أنت مستعد لجلسة أهدأ؟"
+    description="أخبرنا عن حصانك. سنساعدك على تقرير ما إذا كانت الجلسة الخطوة التالية المناسبة."
+    primaryButton={{ text: 'احجز جلسة', href: '/contact-us/' }}
+    secondaryButton={{ text: 'اطّلع على البرامج', href: '/programs/' }}
+  />
+</BaseLayout>
+
+<style>
+  .abm-atmosphere {
+    margin: 0;
+  }
+
+  .abm-atmosphere__img {
+    display: block;
+    width: 100%;
+    max-height: min(52vh, 520px);
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .abm-belief {
+    padding-top: 0;
+  }
+
+  .abm-belief__inner {
+    max-width: 40rem;
+    margin: 0 auto;
+    border-inline-start: 2px solid var(--color-accent);
+    padding-inline-start: 1.75rem;
+  }
+
+  .abm-belief blockquote {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--color-primary);
+  }
+
+  .abm-method {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .abm-method {
+      grid-template-columns: 0.9fr 1.2fr;
+      gap: 3rem;
+    }
+  }
+
+  .abm-method h2 {
+    font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+    font-weight: 500;
+  }
+
+  .abm-method__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .abm-method__list li {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+  }
+
+  .abm-method__list strong {
+    display: block;
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+  }
+
+  .abm-timeline-section {
+    background: var(--color-elevated);
+    border-block: 1px solid var(--color-border);
+  }
+
+  .abm-timeline-title {
+    font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+    font-weight: 500;
+    margin-bottom: 2rem;
+  }
+</style>

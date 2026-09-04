@@ -74,6 +74,26 @@ export interface Props {
   bodyClass?: string;
   /** Theme preference */
   theme?: 'light' | 'dark';
+  /** html lang attribute */
+  htmlLang?: string;
+  /** html dir attribute */
+  htmlDir?: 'ltr' | 'rtl';
+  /** Open Graph / JSON-LD locale (e.g. en_US, ar_EG) */
+  locale?: string;
+  /** Skip-to-content link text */
+  skipLinkText?: string;
+  /** Footer copyright suffix after year and site name */
+  rightsText?: string;
+  /** Show Privacy / Terms / Sitemap links in the footer bottom bar */
+  showLegalLinks?: boolean;
+  /** When set, replaces the default footer legal row */
+  legalLinks?: { label: string; href: string }[];
+  /** Accessible labels for header chrome */
+  navAriaLabel?: string;
+  homeAriaLabel?: string;
+  menuToggleAriaLabel?: string;
+  mobileNavAriaLabel?: string;
+  socialFollowLabel?: string;
 }
 
 const {
@@ -105,6 +125,18 @@ const {
   ctaText,
   ctaHref,
   bodyClass = '',
+  htmlLang = 'en',
+  htmlDir = 'ltr',
+  locale = 'en_US',
+  skipLinkText = 'Skip to main content',
+  rightsText,
+  showLegalLinks = true,
+  legalLinks,
+  navAriaLabel,
+  homeAriaLabel,
+  menuToggleAriaLabel,
+  mobileNavAriaLabel,
+  socialFollowLabel,
 } = Astro.props;
 
 const sameAs = socialLinks?.map((s) => s.url).filter(Boolean);
@@ -113,7 +145,7 @@ const cssVars = designTokens ? tokensToCSSVars(designTokens) : '';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={htmlLang} dir={htmlDir}>
   <head>
     <SEOHead
       title={title}
@@ -131,6 +163,7 @@ const cssVars = designTokens ? tokensToCSSVars(designTokens) : '';
       logoUrl={logoSrc}
       sameAs={sameAs}
       skipAutoJsonLd={skipAutoJsonLd}
+      locale={locale}
     />
     {/* CSS vars from tokensToCSSVars() — safe because source is static TypeScript config, not user input */}
     {cssVars && (
@@ -223,7 +256,7 @@ const cssVars = designTokens ? tokensToCSSVars(designTokens) : '';
         .skip-link {
           position: absolute;
           top: -100%;
-          left: 1rem;
+          inset-inline-start: 1rem;
           padding: 0.75rem 1.5rem;
           background: var(--color-accent, #00d4ff);
           color: var(--color-primary, #0a0f1a);
@@ -287,7 +320,7 @@ const cssVars = designTokens ? tokensToCSSVars(designTokens) : '';
     <slot name="head" />
   </head>
   <body class={`theme-${Astro.props.theme || 'light'} ${bodyClass}`}>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link">{skipLinkText}</a>
 
     <Header
       navigation={navigation}
@@ -298,6 +331,10 @@ const cssVars = designTokens ? tokensToCSSVars(designTokens) : '';
       searchPlaceholder={searchPlaceholder}
       ctaText={ctaText}
       ctaHref={ctaHref}
+      navAriaLabel={navAriaLabel}
+      homeAriaLabel={homeAriaLabel}
+      menuToggleAriaLabel={menuToggleAriaLabel}
+      mobileNavAriaLabel={mobileNavAriaLabel}
     />
 
     <main id="main-content">
@@ -310,6 +347,10 @@ const cssVars = designTokens ? tokensToCSSVars(designTokens) : '';
       socialLinks={socialLinks}
       siteName={siteName}
       tagline={tagline}
+      rightsText={rightsText}
+      showLegalLinks={showLegalLinks}
+      legalLinks={legalLinks}
+      socialFollowLabel={socialFollowLabel}
     />
 
     {/* Conditional, so a site with no gaId does not ship the analytics script

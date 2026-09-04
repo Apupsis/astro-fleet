@@ -11,13 +11,14 @@ import {
   socialLinks,
   OG_IMAGE_PATH,
   OG_IMAGE_ALT,
+  layoutChrome,
 } from '../lib/site-config';
 import { NILE_DUSK } from '../lib/tokens';
 ---
 
 <BaseLayout
-  title={`Page not found — ${SITE_NAME}`}
-  description="This page does not exist on Arabian Breed Mastery."
+  title={`الصفحة غير موجودة — ${SITE_NAME}`}
+  description="هذه الصفحة غير موجودة على Arabian Breed Mastery."
   noindex={true}
   {navigation}
   footerColumns={footerColumns}
@@ -27,23 +28,34 @@ import { NILE_DUSK } from '../lib/tokens';
   tagline={TAGLINE}
   logoSrc={LOGO_SRC}
   logoAlt={LOGO_ALT}
-  ctaText="Book a session"
-  ctaHref="/contact/"
   designTokens={NILE_DUSK}
   ogImage={new URL(OG_IMAGE_PATH, Astro.site).href}
   ogImageAlt={OG_IMAGE_ALT}
+  htmlLang={layoutChrome.htmlLang}
+  htmlDir={layoutChrome.htmlDir}
+  locale={layoutChrome.locale}
+  skipLinkText={layoutChrome.skipLinkText}
+  ctaText={layoutChrome.ctaText}
+  ctaHref={layoutChrome.ctaHref}
+  rightsText={layoutChrome.rightsText}
+  showLegalLinks={layoutChrome.showLegalLinks}
+  legalLinks={layoutChrome.legalLinks}
+  navAriaLabel={layoutChrome.navAriaLabel}
+  homeAriaLabel={layoutChrome.homeAriaLabel}
+  menuToggleAriaLabel={layoutChrome.menuToggleAriaLabel}
+  mobileNavAriaLabel={layoutChrome.mobileNavAriaLabel}
 >
   <section class="not-found">
     <div class="not-found__container">
       <p class="not-found__code">404</p>
-      <h1 class="not-found__title">Page not found</h1>
+      <h1 class="not-found__title">الصفحة غير موجودة</h1>
       <p class="not-found__message">
-        This path is not part of Arabian Breed Mastery. Head home, or open the
-        contact page to book a session.
+        هذا المسار ليس جزءاً من Arabian Breed Mastery. عد إلى الرئيسية، أو افتح
+        صفحة التواصل لحجز جلسة.
       </p>
       <div class="not-found__actions">
-        <a href="/" class="abm-btn abm-btn--primary">Go home</a>
-        <a href="/contact/" class="abm-btn abm-btn--ghost">Book a session</a>
+        <a href="/" class="abm-btn abm-btn--primary">إلى الرئيسية</a>
+        <a href="/contact-us/" class="abm-btn abm-btn--ghost">احجز جلسة</a>
       </div>
     </div>
   </section>

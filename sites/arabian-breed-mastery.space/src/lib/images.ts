@@ -16,34 +16,34 @@ export type SiteImage = {
 export const photos = {
   heroDusk: {
     src: heroDusk,
-    alt: 'Arabian horse moving through soft dusk light',
+    alt: 'حصان عربي يتحرك في ضوء الغسق الهادئ',
   },
   pillarHand: {
     src: pillarHand,
-    alt: 'Close view of quiet hand contact with a horse',
+    alt: 'منظر قريب لتواصل هادئ باليد مع حصان',
   },
   pillarCalm: {
     src: pillarCalm,
-    alt: 'Calm Arabian horse face at rest',
+    alt: 'وجه حصان عربي هادئ في حالة راحة',
   },
   pillarAnatomy: {
     src: pillarAnatomy,
-    alt: 'Horse body and structure in profile',
+    alt: 'جسم الحصان وبنيته من الجانب',
   },
   aboutAtmosphere: {
     src: aboutAtmosphere,
-    alt: 'Quiet equestrian landscape at low light',
+    alt: 'منظر فروسي هادئ في ضوء خافت',
   },
   workSoft: {
     src: workSoft,
-    alt: 'Rider and horse in soft, controlled contact',
+    alt: 'فارس وحصان في تواصل ناعم ومنضبط',
   },
   workCalm: {
     src: workCalm,
-    alt: 'Horse work in an arena with steady focus',
+    alt: 'عمل مع الحصان في الحلبة بتركيز ثابت',
   },
   workAnatomy: {
     src: workAnatomy,
-    alt: 'Horse conformation and movement under saddle',
+    alt: 'تكوين الحصان وحركته تحت السرج',
   },
 } as const satisfies Record<string, SiteImage>;

@@ -15,6 +15,7 @@ const base = await sharp(srcPhoto)
   .jpeg({ quality: 88 })
   .toBuffer();
 
+// Arabic glyphs need a system face with Arabic coverage (Segoe UI / Arial on Windows).
 const overlay = Buffer.from(`
 <svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -25,9 +26,9 @@ const overlay = Buffer.from(`
     </linearGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#g)"/>
-  <text x="80" y="430" font-family="Georgia, serif" font-size="28" fill="#9EC5C3" letter-spacing="4">ARABIAN BREED MASTERY</text>
-  <text x="80" y="510" font-family="Georgia, serif" font-size="64" fill="#F3EFE8">Quiet hands for hot horses</text>
-  <text x="80" y="560" font-family="system-ui, sans-serif" font-size="22" fill="#CFC8BC">Egypt · Est. 2020</text>
+  <text x="1120" y="400" text-anchor="end" font-family="Georgia, serif" font-size="28" fill="#9EC5C3" letter-spacing="4">ARABIAN BREED MASTERY</text>
+  <text x="1120" y="490" text-anchor="end" font-family="'Segoe UI', Arial, 'Noto Naskh Arabic', sans-serif" font-size="48" fill="#F3EFE8" direction="rtl" unicode-bidi="embed">عمل هادئ للخيول الحارة</text>
+  <text x="1120" y="545" text-anchor="end" font-family="'Segoe UI', Arial, sans-serif" font-size="22" fill="#CFC8BC" direction="rtl" unicode-bidi="embed">مصر · تأسست 2020</text>
 </svg>
 `);
 

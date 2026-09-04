@@ -11,8 +11,8 @@ export const NILE_DUSK: DesignTokens = {
     cta: '#2F6B68',
   },
   fonts: {
-    heading: 'Cormorant Garamond',
-    body: 'Outfit, system-ui, sans-serif',
+    heading: 'Amiri',
+    body: 'IBM Plex Sans Arabic, system-ui, sans-serif',
   },
   heroLayout: 'fullwidth',
   ctaStyle: 'square',

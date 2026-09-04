@@ -1,0 +1,82 @@
+---
+import BaseLayout from '@astro-fleet/shared-ui/src/layouts/BaseLayout.astro';
+import LegalPage from '../components/LegalPage.astro';
+import {
+  SITE_NAME,
+  TAGLINE,
+  LOGO_SRC,
+  LOGO_ALT,
+  OG_IMAGE_PATH,
+  OG_IMAGE_ALT,
+  navigation,
+  footerColumns,
+  contactInfo,
+  socialLinks,
+  PHONE_DISPLAY,
+  layoutChrome,
+} from '../lib/site-config';
+import { NILE_DUSK } from '../lib/tokens';
+---
+
+<BaseLayout
+  title={`شروط الاستخدام — ${SITE_NAME}`}
+  description={`شروط استخدام موقع Arabian Breed Mastery ومحتواه وخدمات الحجز المعروضة عليه.`}
+  {navigation}
+  footerColumns={footerColumns}
+  {contactInfo}
+  {socialLinks}
+  siteName={SITE_NAME}
+  tagline={TAGLINE}
+  logoSrc={LOGO_SRC}
+  logoAlt={LOGO_ALT}
+  ogImage={new URL(OG_IMAGE_PATH, Astro.site).href}
+  ogImageAlt={OG_IMAGE_ALT}
+  designTokens={NILE_DUSK}
+  htmlLang={layoutChrome.htmlLang}
+  htmlDir={layoutChrome.htmlDir}
+  locale={layoutChrome.locale}
+  skipLinkText={layoutChrome.skipLinkText}
+  ctaText={layoutChrome.ctaText}
+  ctaHref={layoutChrome.ctaHref}
+  rightsText={layoutChrome.rightsText}
+  showLegalLinks={layoutChrome.showLegalLinks}
+  legalLinks={layoutChrome.legalLinks}
+  navAriaLabel={layoutChrome.navAriaLabel}
+  homeAriaLabel={layoutChrome.homeAriaLabel}
+  menuToggleAriaLabel={layoutChrome.menuToggleAriaLabel}
+  mobileNavAriaLabel={layoutChrome.mobileNavAriaLabel}
+>
+  <LegalPage
+    title="شروط الاستخدام"
+    eyebrow="قانوني"
+    intro="باستخدامك هذا الموقع، توافق على الشروط التالية المتعلقة بالمحتوى والحجز والتواصل."
+    sections={[
+      {
+        heading: 'الموقع والمحتوى',
+        paragraphs: [
+          'المحتوى لأغراض إعلامية عن ممارسة Arabian Breed Mastery. لا يشكّل استشارة بيطرية أو ضماناً لنتائج تدريب معيّنة.',
+          'اسم العلامة Arabian Breed Mastery والمواد على الموقع محمية بحقوق الاستخدام المعتادة. [CLIENT TO SUPPLY: تفاصيل الملكية الفكرية إن لزم.]',
+        ],
+      },
+      {
+        heading: 'الحجز والأسعار',
+        paragraphs: [
+          'لا تُنشر قائمة أسعار عامة. يُعرض السعر عبر الهاتف قبل تأكيد الحجز، ولا يُثبَّت شيء حتى توافق.',
+          `للتواصل: ${PHONE_DISPLAY} أو نموذج الاستفسار على صفحة التواصل.`,
+        ],
+      },
+      {
+        heading: 'دقة المعلومات',
+        paragraphs: [
+          'نسعى لدقة العناوين وبيانات الاتصال. إن وجدت خطأً، أخبرنا لنصلحه.',
+        ],
+      },
+      {
+        heading: 'التغييرات',
+        paragraphs: [
+          'قد نحدّث هذه الشروط عند تغيّر الموقع أو الخدمات. يسري النص المنشور على هذه الصفحة من تاريخ التحديث.',
+        ],
+      },
+    ]}
+  />
+</BaseLayout>

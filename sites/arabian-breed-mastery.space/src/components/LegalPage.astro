@@ -1,0 +1,74 @@
+---
+import Breadcrumb from '@astro-fleet/shared-ui/src/components/Breadcrumb.astro';
+import { layoutChrome } from '../lib/site-config';
+
+interface Section {
+  heading: string;
+  paragraphs: string[];
+}
+
+interface Props {
+  title: string;
+  eyebrow: string;
+  intro: string;
+  sections: Section[];
+}
+
+const { title, eyebrow, intro, sections } = Astro.props;
+---
+
+<div class="container">
+  <Breadcrumb
+    items={[{ label: 'الرئيسية', href: '/' }, { label: title }]}
+    ariaLabel={layoutChrome.breadcrumbAriaLabel}
+  />
+</div>
+
+<section class="abm-page-hero">
+  <div class="container">
+    <div class="abm-eyebrow">{eyebrow}</div>
+    <h1>{title}</h1>
+    <p>{intro}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container abm-legal">
+    {
+      sections.map((s) => (
+        <section class="abm-legal__block">
+          <h2>{s.heading}</h2>
+          {s.paragraphs.map((p) => (
+            <p>{p}</p>
+          ))}
+        </section>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .abm-legal {
+    max-width: 42rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .abm-legal__block h2 {
+    font-size: 1.35rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    text-wrap: balance;
+  }
+
+  .abm-legal__block p {
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+    margin-bottom: 0.75rem;
+  }
+
+  .abm-legal__block p:last-child {
+    margin-bottom: 0;
+  }
+</style>

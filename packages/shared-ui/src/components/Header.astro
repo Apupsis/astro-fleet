@@ -23,6 +23,10 @@ export interface Props {
   search?: boolean;
   /** Name three things this site actually covers. Generic placeholders teach nobody what to type. */
   searchPlaceholder?: string;
+  navAriaLabel?: string;
+  homeAriaLabel?: string;
+  menuToggleAriaLabel?: string;
+  mobileNavAriaLabel?: string;
 }
 
 const {
@@ -34,16 +38,21 @@ const {
   ctaHref = '/contact',
   search = false,
   searchPlaceholder = 'Search this site',
+  navAriaLabel = 'Main navigation',
+  homeAriaLabel,
+  menuToggleAriaLabel = 'Toggle mobile menu',
+  mobileNavAriaLabel = 'Mobile navigation',
 } = Astro.props;
 
 const currentPath = Astro.url.pathname;
+const homeLabel = homeAriaLabel ?? `${siteName} - Home`;
 ---
 
 <header class="header" role="banner">
-  <nav class="header__nav" aria-label="Main navigation">
+  <nav class="header__nav" aria-label={navAriaLabel}>
     <div class="header__container">
       <!-- Logo -->
-      <a href="/" class="header__logo" aria-label={`${siteName} - Home`}>
+      <a href="/" class="header__logo" aria-label={homeLabel}>
         {logoSrc ? (
           <img src={logoSrc} alt={logoAlt} class="header__logo-img" width="180" height="48" />
         ) : (
@@ -98,14 +107,14 @@ const currentPath = Astro.url.pathname;
 
       <!-- Mobile Menu Toggle (CSS checkbox hack) -->
       <input type="checkbox" id="mobile-menu-toggle" class="header__toggle-input" aria-hidden="true" />
-      <label for="mobile-menu-toggle" class="header__toggle" aria-label="Toggle mobile menu">
+      <label for="mobile-menu-toggle" class="header__toggle" aria-label={menuToggleAriaLabel}>
         <span class="header__toggle-bar"></span>
         <span class="header__toggle-bar"></span>
         <span class="header__toggle-bar"></span>
       </label>
 
       <!-- Mobile Menu -->
-      <div class="header__mobile-menu" role="dialog" aria-label="Mobile navigation">
+      <div class="header__mobile-menu" role="dialog" aria-label={mobileNavAriaLabel}>
         <ul class="header__mobile-list">
           {navigation.map((item, idx) => (
             <li class="header__mobile-item">
@@ -254,7 +263,7 @@ const currentPath = Astro.url.pathname;
   .header__dropdown {
     position: absolute;
     top: 100%;
-    left: 0;
+    inset-inline-start: 0;
     min-width: 220px;
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.06);
@@ -376,8 +385,7 @@ const currentPath = Astro.url.pathname;
   .header__mobile-menu {
     position: fixed;
     top: 4.5rem;
-    left: 0;
-    right: 0;
+    inset-inline: 0;
     bottom: 0;
     background: #ffffff;
     overflow-y: auto;
@@ -385,6 +393,10 @@ const currentPath = Astro.url.pathname;
     transition: transform 0.3s ease;
     z-index: 1000;
     padding: 1.5rem;
+  }
+
+  :global([dir='rtl']) .header__mobile-menu {
+    transform: translateX(-100%);
   }
 
   .header__toggle-input:checked ~ .header__mobile-menu {
@@ -440,7 +452,8 @@ const currentPath = Astro.url.pathname;
   .header__mobile-sublist {
     list-style: none;
     margin: 0;
-    padding: 0 0 0.5rem 1rem;
+    padding: 0 0 0.5rem;
+    padding-inline-start: 1rem;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease;

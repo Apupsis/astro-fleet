@@ -1,0 +1,7 @@
+# Legacy paths → canonical (Cloudflare Pages)
+/about /about-us/ 301
+/about/ /about-us/ 301
+/contact /contact-us/ 301
+/contact/ /contact-us/ 301
+/services /programs/ 301
+/services/ /programs/ 301

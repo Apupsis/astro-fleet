@@ -1,0 +1,196 @@
+---
+import BaseLayout from '@astro-fleet/shared-ui/src/layouts/BaseLayout.astro';
+import Breadcrumb from '@astro-fleet/shared-ui/src/components/Breadcrumb.astro';
+import CTABlock from '@astro-fleet/shared-ui/src/components/CTABlock.astro';
+import {
+  SITE_NAME,
+  TAGLINE,
+  LOGO_SRC,
+  LOGO_ALT,
+  OG_IMAGE_PATH,
+  OG_IMAGE_ALT,
+  navigation,
+  footerColumns,
+  contactInfo,
+  socialLinks,
+  PHONE_DISPLAY,
+  AREA_SERVED,
+  layoutChrome,
+} from '../../lib/site-config';
+import { programs } from '../../lib/programs';
+import { NILE_DUSK } from '../../lib/tokens';
+---
+
+<BaseLayout
+  title={`البرامج — ${SITE_NAME}`}
+  description={`برامج Arabian Breed Mastery: كوردا ناعمة، توازن المقعد، ضبط الطبع الحار، والتجميع في الحلبة — للخيول العربية في ${AREA_SERVED}.`}
+  keywords={['برامج تدريب خيل', 'خيول عربية', 'كوردا', 'تهدئة خيل', 'مصر']}
+  {navigation}
+  footerColumns={footerColumns}
+  {contactInfo}
+  {socialLinks}
+  siteName={SITE_NAME}
+  tagline={TAGLINE}
+  logoSrc={LOGO_SRC}
+  logoAlt={LOGO_ALT}
+  ogImage={new URL(OG_IMAGE_PATH, Astro.site).href}
+  ogImageAlt={OG_IMAGE_ALT}
+  designTokens={NILE_DUSK}
+  htmlLang={layoutChrome.htmlLang}
+  htmlDir={layoutChrome.htmlDir}
+  locale={layoutChrome.locale}
+  skipLinkText={layoutChrome.skipLinkText}
+  ctaText={layoutChrome.ctaText}
+  ctaHref={layoutChrome.ctaHref}
+  rightsText={layoutChrome.rightsText}
+  showLegalLinks={layoutChrome.showLegalLinks}
+  legalLinks={layoutChrome.legalLinks}
+  navAriaLabel={layoutChrome.navAriaLabel}
+  homeAriaLabel={layoutChrome.homeAriaLabel}
+  menuToggleAriaLabel={layoutChrome.menuToggleAriaLabel}
+  mobileNavAriaLabel={layoutChrome.mobileNavAriaLabel}
+>
+  <div class="container">
+    <Breadcrumb
+      items={[{ label: 'الرئيسية', href: '/' }, { label: 'البرامج' }]}
+      ariaLabel={layoutChrome.breadcrumbAriaLabel}
+    />
+  </div>
+
+  <section class="abm-page-hero">
+    <div class="container">
+      <div class="abm-eyebrow">البرامج</div>
+      <h1>أربعة مسارات للعمل الهادئ.</h1>
+      <p>
+        اختر البرنامج الأقرب لاحتياج حصانك اليوم. تُعرض الأسعار عبر الهاتف قبل
+        الحجز — دون قائمة أسعار عامة.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container abm-catalog">
+      {
+        programs.map((p, i) => (
+          <a href={`/programs/${p.slug}/`} class="abm-catalog__item">
+            <span class="abm-catalog__num" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div class="abm-catalog__copy">
+              <h2>{p.title}</h2>
+              <p>{p.summary}</p>
+              <span class="abm-catalog__more">اقرأ التفاصيل</span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section abm-note">
+    <div class="container abm-note__box">
+      <div class="abm-eyebrow">ملاحظة صادقة</div>
+      <h2>ما لا ندّعيه.</h2>
+      <p>
+        لا نختلق قوائم عملاء أو نتائج مسابقات أو طباعاً مضمونة. تعتمد النتائج على
+        الحصان والفارس والمتابعة المنتظمة بين الجلسات. اسألنا عمّا هو واقعي
+        لحصانك عند الحجز.
+      </p>
+    </div>
+  </section>
+
+  <CTABlock
+    heading="احجز جلسة لحصانك العربي."
+    description={`اتصل على ${PHONE_DISPLAY}، أو أرسل استفساراً — سنرتّب وقتاً في ${AREA_SERVED}.`}
+    primaryButton={{ text: 'احجز جلسة', href: '/contact-us/' }}
+    secondaryButton={{ text: 'اقرأ عنّا', href: '/about-us/' }}
+  />
+</BaseLayout>
+
+<style>
+  .abm-catalog {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .abm-catalog__item {
+    display: grid;
+    gap: 0.75rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--color-border);
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.15s ease;
+  }
+
+  .abm-catalog__item:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .abm-catalog__item:hover h2,
+  .abm-catalog__item:focus-visible h2 {
+    color: var(--color-accent);
+  }
+
+  .abm-catalog__item:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+
+  @media (min-width: 768px) {
+    .abm-catalog__item {
+      grid-template-columns: 4rem 1fr;
+      gap: 2rem;
+      padding: 2.5rem 0;
+      align-items: start;
+    }
+  }
+
+  .abm-catalog__num {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    color: var(--color-accent);
+    padding-top: 0.4rem;
+  }
+
+  .abm-catalog__copy h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    text-wrap: balance;
+  }
+
+  .abm-catalog__copy p {
+    color: var(--color-text-secondary);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    max-width: 40rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .abm-catalog__more {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .abm-note {
+    padding-top: 0;
+  }
+
+  .abm-note__box {
+    max-width: 40rem;
+  }
+
+  .abm-note h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .abm-note p {
+    color: var(--color-text-secondary);
+    font-size: 1.0625rem;
+  }
+</style>
