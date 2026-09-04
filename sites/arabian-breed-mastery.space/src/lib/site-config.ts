@@ -6,7 +6,7 @@ import type {
 } from '@astro-fleet/shared-ui/src/components/Footer.astro';
 
 export const SITE_NAME = 'Arabian Breed Mastery';
-export const TAGLINE = 'Мастерство Арабской Породы · Soft work for hot horses · Egypt, est. 2020';
+export const ALTERNATE_NAME = 'Мастерство Арабской Породы';
 export const LOGO_SRC = '/brand/wordmark.svg';
 export const LOGO_ALT = SITE_NAME;
 
@@ -14,6 +14,46 @@ export const LOGO_ALT = SITE_NAME;
 export const OG_IMAGE_PATH = '/images/og-default.jpg';
 export const OG_IMAGE_ALT =
   'Arabian Breed Mastery — Quiet hands for hot horses';
+
+/** Contact & location — single source of truth for phone, address, founding. */
+export const PHONE_DISPLAY = '+20 122 060 1781';
+export const PHONE_E164 = '+201220601781';
+export const FOUNDING_YEAR = '2020';
+export const AREA_SERVED = 'Egypt';
+
+export const TAGLINE = `${ALTERNATE_NAME} · Soft work for hot horses · ${AREA_SERVED}, est. ${FOUNDING_YEAR}`;
+
+export const address = {
+  streetAddress: 'Unnamed road',
+  addressLocality: 'Al Maţarīyah',
+  addressRegion: 'Ad Daqahlīyah',
+  postalCode: '35789',
+  addressCountry: 'EG',
+  countryName: 'Egypt',
+} as const;
+
+export const LOCATION_SHORT = `${address.addressLocality}, ${address.countryName}`;
+export const LOCATION_REGION = `${address.addressLocality}, ${address.addressRegion}`;
+
+export function postalAddressSchema() {
+  return {
+    '@type': 'PostalAddress' as const,
+    streetAddress: address.streetAddress,
+    addressLocality: address.addressLocality,
+    addressRegion: address.addressRegion,
+    postalCode: address.postalCode,
+    addressCountry: address.addressCountry,
+  };
+}
+
+export const contactInfo: ContactInfo = {
+  phone: PHONE_DISPLAY,
+  address: [
+    address.streetAddress,
+    `${address.addressLocality}, ${address.addressRegion} ${address.postalCode}`,
+    address.countryName,
+  ].join(', '),
+};
 
 export const navigation: MenuItem[] = [
   { label: 'Approach', href: '/about/' },
@@ -36,24 +76,17 @@ export const footerColumns: FooterColumn[] = [
     links: [
       { label: 'Book a session', href: '/contact/' },
       { label: 'Location', href: '/contact/' },
-      { label: 'Call +20 122 060 1781', href: 'tel:+201220601781' },
+      { label: `Call ${PHONE_DISPLAY}`, href: `tel:${PHONE_E164}` },
     ],
   },
   {
     title: 'About',
     links: [
       { label: 'Our story', href: '/about/' },
-      { label: 'Since 2020', href: '/about/' },
+      { label: `Since ${FOUNDING_YEAR}`, href: '/about/' },
       { label: 'Contact', href: '/contact/' },
     ],
   },
 ];
 
-export const contactInfo: ContactInfo = {
-  phone: '+20 122 060 1781',
-  address: 'Unnamed road, Al Maţarīyah, Ad Daqahlīyah 35789, Egypt',
-};
-
 export const socialLinks: SocialLink[] = [];
-
-export const PHONE_E164 = '+201220601781';

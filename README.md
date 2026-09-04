@@ -461,7 +461,7 @@ If you ship a site with Astro Fleet, open a PR adding it here.
 
 ## Stack
 
-Astro 6 · Bun · Turborepo 2 · Tailwind CSS 4 · TypeScript · static-first, zero JS
+Astro 7 · Bun · Turborepo 2 · Tailwind CSS 4 · TypeScript · static-first, zero JS
 by default · works with React, Vue, Svelte, Solid and Preact
 
 ## License

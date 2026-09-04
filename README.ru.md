@@ -416,7 +416,7 @@ Linux.
 
 ## Стек
 
-Astro 6 · Bun · Turborepo 2 · Tailwind CSS 4 · TypeScript · static-first, ноль JS
+Astro 7 · Bun · Turborepo 2 · Tailwind CSS 4 · TypeScript · static-first, ноль JS
 по умолчанию · работает с React, Vue, Svelte, Solid и Preact
 
 ## Лицензия

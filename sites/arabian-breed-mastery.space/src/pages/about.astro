@@ -6,6 +6,7 @@ import Timeline from '@astro-fleet/shared-ui/src/components/Timeline.astro';
 import CTABlock from '@astro-fleet/shared-ui/src/components/CTABlock.astro';
 import {
   SITE_NAME,
+  ALTERNATE_NAME,
   TAGLINE,
   LOGO_SRC,
   LOGO_ALT,
@@ -15,16 +16,17 @@ import {
   footerColumns,
   contactInfo,
   socialLinks,
+  FOUNDING_YEAR,
+  AREA_SERVED,
 } from '../lib/site-config';
 import { photos } from '../lib/images';
 import { NILE_DUSK } from '../lib/tokens';
 
 const timeline = [
   {
-    date: '2020',
+    date: FOUNDING_YEAR,
     title: 'Practice begins',
-    description:
-      'Arabian Breed Mastery starts in Egypt, focused on soft communication with Arabian horses.',
+    description: `Arabian Breed Mastery starts in ${AREA_SERVED}, focused on soft communication with Arabian horses.`,
   },
   {
     date: 'Focus',
@@ -43,7 +45,7 @@ const timeline = [
 
 <BaseLayout
   title={`Approach — ${SITE_NAME}`}
-  description="How Arabian Breed Mastery works with soft hand contact, calming techniques, and anatomy — for Arabian horse owners and riders in Egypt since 2020."
+  description={`How Arabian Breed Mastery works with soft hand contact, calming techniques, and anatomy — for Arabian horse owners and riders in ${AREA_SERVED} since ${FOUNDING_YEAR}.`}
   keywords={['Arabian horse training', 'soft rein', 'equine anatomy', 'Egypt']}
   {navigation}
   footerColumns={footerColumns}
@@ -70,9 +72,9 @@ const timeline = [
       <div class="abm-eyebrow">Approach</div>
       <h1>Listen first. Then ask.</h1>
       <p>
-        Arabian Breed Mastery — Мастерство Арабской Породы — is a practice for
-        people who ride and keep Arabian horses. We specialise in soft hand work,
-        calming “hot” horses, and sessions that respect how the horse is built.
+        Arabian Breed Mastery — {ALTERNATE_NAME} — is a practice for people who
+        ride and keep Arabian horses. We specialise in soft hand work, calming
+        “hot” horses, and sessions that respect how the horse is built.
       </p>
     </div>
   </section>
@@ -127,7 +129,7 @@ const timeline = [
   <section class="section abm-timeline-section">
     <div class="container">
       <div class="abm-eyebrow">Path</div>
-      <h2 class="abm-timeline-title">From 2020 to the work today.</h2>
+      <h2 class="abm-timeline-title">From {FOUNDING_YEAR} to the work today.</h2>
       <Timeline events={timeline} />
     </div>
   </section>

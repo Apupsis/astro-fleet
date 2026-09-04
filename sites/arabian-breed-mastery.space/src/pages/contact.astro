@@ -5,6 +5,7 @@ import ContactForm from '@astro-fleet/shared-ui/src/components/ContactForm.astro
 import FAQ from '@astro-fleet/shared-ui/src/components/FAQ.astro';
 import {
   SITE_NAME,
+  ALTERNATE_NAME,
   TAGLINE,
   LOGO_SRC,
   LOGO_ALT,
@@ -12,7 +13,11 @@ import {
   footerColumns,
   contactInfo,
   socialLinks,
+  PHONE_DISPLAY,
   PHONE_E164,
+  FOUNDING_YEAR,
+  AREA_SERVED,
+  address,
   OG_IMAGE_PATH,
   OG_IMAGE_ALT,
 } from '../lib/site-config';
@@ -41,7 +46,7 @@ const ogImageUrl = new URL(OG_IMAGE_PATH, Astro.site).href;
 
 <BaseLayout
   title={`Contact — ${SITE_NAME}`}
-  description="Book a session with Arabian Breed Mastery in Egypt. Call +20 122 060 1781, or send an enquiry."
+  description={`Book a session with Arabian Breed Mastery in ${AREA_SERVED}. Call ${PHONE_DISPLAY}, or send an enquiry.`}
   keywords={['book horse training', 'Arabian Breed Mastery contact', 'Egypt equine']}
   {navigation}
   footerColumns={footerColumns}
@@ -92,25 +97,26 @@ const ogImageUrl = new URL(OG_IMAGE_PATH, Astro.site).href;
         <div class="abm-info">
           <div class="abm-info__label">Phone</div>
           <div class="abm-info__value">
-            <a href={`tel:${PHONE_E164}`}>+20 122 060 1781</a>
+            <a href={`tel:${PHONE_E164}`}>{PHONE_DISPLAY}</a>
           </div>
         </div>
 
         <div class="abm-info">
           <div class="abm-info__label">Address</div>
           <div class="abm-info__value">
-            Unnamed road<br />
-            Al Maţarīyah, Ad Daqahlīyah 35789<br />
-            Egypt
+            {address.streetAddress}<br />
+            {address.addressLocality}, {address.addressRegion}{' '}
+            {address.postalCode}<br />
+            {address.countryName}
           </div>
         </div>
 
         <div class="abm-info">
           <div class="abm-info__label">Practice</div>
           <div class="abm-info__value">
-            Arabian Breed Mastery<br />
-            <span lang="ru">Мастерство Арабской Породы</span><br />
-            Since 2020
+            {SITE_NAME}<br />
+            <span lang="ru">{ALTERNATE_NAME}</span><br />
+            Since {FOUNDING_YEAR}
           </div>
         </div>
       </div>
@@ -126,7 +132,7 @@ const ogImageUrl = new URL(OG_IMAGE_PATH, Astro.site).href;
           heading="Send an enquiry"
           description="We will follow up by phone. No public email is listed — calling is the fastest path."
           successText="Thank you. We will reply by phone within one working day."
-          errorText="We could not send that just now. Please call +20 122 060 1781 instead."
+          errorText={`We could not send that just now. Please call ${PHONE_DISPLAY} instead.`}
         />
       </div>
     </div>

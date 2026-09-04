@@ -5,6 +5,7 @@ import CTABlock from '@astro-fleet/shared-ui/src/components/CTABlock.astro';
 import FAQ from '@astro-fleet/shared-ui/src/components/FAQ.astro';
 import {
   SITE_NAME,
+  ALTERNATE_NAME,
   TAGLINE,
   LOGO_SRC,
   LOGO_ALT,
@@ -14,6 +15,13 @@ import {
   footerColumns,
   contactInfo,
   socialLinks,
+  PHONE_DISPLAY,
+  PHONE_E164,
+  FOUNDING_YEAR,
+  AREA_SERVED,
+  LOCATION_SHORT,
+  LOCATION_REGION,
+  postalAddressSchema,
 } from '../lib/site-config';
 import { photos } from '../lib/images';
 import { NILE_DUSK } from '../lib/tokens';
@@ -52,27 +60,25 @@ const faqItems = [
   },
   {
     question: 'Where do sessions take place?',
-    answer:
-      'In Egypt, based in Al Maţarīyah, Ad Daqahlīyah. Call to confirm location and availability for your horse.',
+    answer: `In ${AREA_SERVED}, based in ${LOCATION_REGION}. Call to confirm location and availability for your horse.`,
   },
   {
     question: 'How do I book?',
-    answer:
-      'Call +20 122 060 1781, or send an enquiry on the contact page. We will arrange a time that works for you and your horse.',
+    answer: `Call ${PHONE_DISPLAY}, or send an enquiry on the contact page. We will arrange a time that works for you and your horse.`,
   },
 ];
 ---
 
 <BaseLayout
   title={`${SITE_NAME} — Soft work for Arabian horses`}
-  description="Arabian Breed Mastery helps owners and riders of Arabian horses with soft hand work, calming techniques for hot horses, and anatomy-aware sessions. Egypt, since 2020."
+  description={`Arabian Breed Mastery helps owners and riders of Arabian horses with soft hand work, calming techniques for hot horses, and anatomy-aware sessions. ${AREA_SERVED}, since ${FOUNDING_YEAR}.`}
   keywords={[
     'Arabian horses',
     'soft hand work',
     'hot horses',
     'equine training Egypt',
     'Arabian breed',
-    'Мастерство Арабской Породы',
+    ALTERNATE_NAME,
   ]}
   {navigation}
   footerColumns={footerColumns}
@@ -92,22 +98,14 @@ const faqItems = [
       '@type': 'LocalBusiness',
       '@id': new URL('/#localbusiness', Astro.site).href,
       name: SITE_NAME,
-      alternateName: 'Мастерство Арабской Породы',
-      description:
-        'Soft hand work, calming techniques for hot Arabian horses, and anatomy-aware sessions in Egypt.',
+      alternateName: ALTERNATE_NAME,
+      description: `Soft hand work, calming techniques for hot Arabian horses, and anatomy-aware sessions in ${AREA_SERVED}.`,
       url: siteUrl,
       image: ogImageUrl,
-      foundingDate: '2020',
-      telephone: '+201220601781',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: 'Unnamed road',
-        addressLocality: 'Al Maţarīyah',
-        addressRegion: 'Ad Daqahlīyah',
-        postalCode: '35789',
-        addressCountry: 'EG',
-      },
-      areaServed: 'Egypt',
+      foundingDate: FOUNDING_YEAR,
+      telephone: PHONE_E164,
+      address: postalAddressSchema(),
+      areaServed: AREA_SERVED,
     },
     {
       '@type': 'FAQPage',
@@ -137,7 +135,7 @@ const faqItems = [
     <div class="abm-hero__grain" aria-hidden="true"></div>
     <div class="abm-hero__inner">
       <p class="abm-hero__brand">{SITE_NAME}</p>
-      <p class="abm-hero__alt" lang="ru">Мастерство Арабской Породы</p>
+      <p class="abm-hero__alt" lang="ru">{ALTERNATE_NAME}</p>
       <h1 class="abm-hero__title">
         Quiet hands<br />
         <em>for hot horses.</em>
@@ -153,7 +151,7 @@ const faqItems = [
           >How we work</a
         >
       </div>
-      <p class="abm-hero__meta">Egypt · Est. 2020</p>
+      <p class="abm-hero__meta">{AREA_SERVED} · Est. {FOUNDING_YEAR}</p>
     </div>
   </section>
 
@@ -207,11 +205,11 @@ const faqItems = [
     <div class="container abm-strip__row">
       <div>
         <span class="abm-strip__label">Based in</span>
-        <strong>Al Maţarīyah, Egypt</strong>
+        <strong>{LOCATION_SHORT}</strong>
       </div>
       <div>
         <span class="abm-strip__label">Practice since</span>
-        <strong>2020</strong>
+        <strong>{FOUNDING_YEAR}</strong>
       </div>
       <div>
         <span class="abm-strip__label">For</span>

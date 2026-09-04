@@ -17,7 +17,7 @@ want. Claude reads it.
 A multi-site Astro monorepo. Each site lives in `sites/<domain>/` and deploys
 independently. Shared components and design tokens live in `packages/`.
 
-**Stack:** Astro 6, Bun, Turborepo 2, Tailwind CSS 4, TypeScript strict.
+**Stack:** Astro 7, Bun, Turborepo 2, Tailwind CSS 4, TypeScript strict.
 Static-first, zero client JS by default. Fonts self-hosted via the Astro Fonts
 API — no third-party font requests at runtime.
 
