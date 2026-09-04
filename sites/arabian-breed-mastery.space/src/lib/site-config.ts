@@ -36,7 +36,7 @@ export const footerColumns: FooterColumn[] = [
     links: [
       { label: 'Book a session', href: '/contact/' },
       { label: 'Location', href: '/contact/' },
-      { label: 'WhatsApp', href: 'https://wa.me/201220601781' },
+      { label: 'Call +20 122 060 1781', href: 'tel:+201220601781' },
     ],
   },
   {
@@ -54,12 +54,6 @@ export const contactInfo: ContactInfo = {
   address: 'Unnamed road, Al Maţarīyah, Ad Daqahlīyah 35789, Egypt',
 };
 
-export const socialLinks: SocialLink[] = [
-  {
-    platform: 'whatsapp',
-    url: 'https://wa.me/201220601781',
-  },
-];
+export const socialLinks: SocialLink[] = [];
 
 export const PHONE_E164 = '+201220601781';
-export const WHATSAPP_NUMBER = '201220601781';

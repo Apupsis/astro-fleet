@@ -13,7 +13,6 @@ import {
   contactInfo,
   socialLinks,
   PHONE_E164,
-  WHATSAPP_NUMBER,
   OG_IMAGE_PATH,
   OG_IMAGE_ALT,
 } from '../lib/site-config';
@@ -23,17 +22,17 @@ const contactFaq = [
   {
     question: 'How fast do you reply?',
     answer:
-      'We aim to answer phone and WhatsApp messages within one business day. If you are writing about a specific horse, include breed details, age, and what you want to change.',
+      'We aim to answer phone calls and enquiries within one business day. If you are writing about a specific horse, include breed details, age, and what you want to change.',
   },
   {
     question: 'Can I visit without a horse?',
     answer:
-      'Yes — an initial conversation by phone or WhatsApp is often enough to decide whether a session makes sense. In-person visits are arranged case by case.',
+      'Yes — an initial conversation by phone is often enough to decide whether a session makes sense. In-person visits are arranged case by case.',
   },
   {
     question: 'How are sessions priced?',
     answer:
-      'Rates depend on the horse and the work you want. We quote clearly by phone or WhatsApp before you book — nothing is fixed until you agree.',
+      'Rates depend on the horse and the work you want. We quote clearly by phone before you book — nothing is fixed until you agree.',
   },
 ];
 
@@ -42,7 +41,7 @@ const ogImageUrl = new URL(OG_IMAGE_PATH, Astro.site).href;
 
 <BaseLayout
   title={`Contact — ${SITE_NAME}`}
-  description="Book a session with Arabian Breed Mastery in Egypt. Call or WhatsApp +20 122 060 1781, or send an enquiry."
+  description="Book a session with Arabian Breed Mastery in Egypt. Call +20 122 060 1781, or send an enquiry."
   keywords={['book horse training', 'Arabian Breed Mastery contact', 'Egypt equine']}
   {navigation}
   footerColumns={footerColumns}
@@ -80,8 +79,8 @@ const ogImageUrl = new URL(OG_IMAGE_PATH, Astro.site).href;
       <div class="abm-eyebrow">Contact</div>
       <h1>Book a session.</h1>
       <p>
-        Call or WhatsApp, or send a short enquiry. Tell us about your Arabian and
-        what you want from the work — soft hand, calming a hot horse, or a more
+        Call, or send a short enquiry. Tell us about your Arabian and what you
+        want from the work — soft hand, calming a hot horse, or a more
         anatomical approach.
       </p>
     </div>
@@ -91,18 +90,10 @@ const ogImageUrl = new URL(OG_IMAGE_PATH, Astro.site).href;
     <div class="container abm-contact__grid">
       <div class="abm-contact__info">
         <div class="abm-info">
-          <div class="abm-info__label">Phone / WhatsApp</div>
+          <div class="abm-info__label">Phone</div>
           <div class="abm-info__value">
             <a href={`tel:${PHONE_E164}`}>+20 122 060 1781</a>
           </div>
-          <a
-            class="abm-info__link"
-            href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello — I would like to book a session for my Arabian horse.')}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Open WhatsApp →
-          </a>
         </div>
 
         <div class="abm-info">
@@ -128,17 +119,14 @@ const ogImageUrl = new URL(OG_IMAGE_PATH, Astro.site).href;
         <p class="abm-form-hint">
           Optional fields: use <strong>Company</strong> for your stable or yard,
           and <strong>Product interest</strong> for your horse’s name or the
-          focus you want (soft hand, calming, anatomy). Prefer WhatsApp if you
-          want a faster reply.
+          focus you want (soft hand, calming, anatomy). Prefer a phone call if
+          you want a faster reply.
         </p>
         <ContactForm
           heading="Send an enquiry"
-          description="We will follow up by phone or WhatsApp. No public email is listed — WhatsApp is the fastest path."
-          showWhatsApp={true}
-          whatsAppNumber={WHATSAPP_NUMBER}
-          whatsAppMessage="Hello — I would like to book a session for my Arabian horse."
-          successText="Thank you. We will reply by phone or WhatsApp within one working day."
-          errorText="We could not send that just now. Please call or WhatsApp +20 122 060 1781 instead."
+          description="We will follow up by phone. No public email is listed — calling is the fastest path."
+          successText="Thank you. We will reply by phone within one working day."
+          errorText="We could not send that just now. Please call +20 122 060 1781 instead."
         />
       </div>
     </div>
@@ -202,12 +190,6 @@ const ogImageUrl = new URL(OG_IMAGE_PATH, Astro.site).href;
 
   .abm-info__value a {
     color: var(--color-primary);
-    font-weight: 600;
-  }
-
-  .abm-info__link {
-    display: inline-block;
-    margin-top: 0.65rem;
     font-weight: 600;
   }
 

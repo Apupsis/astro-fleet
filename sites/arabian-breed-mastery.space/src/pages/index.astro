@@ -14,7 +14,6 @@ import {
   footerColumns,
   contactInfo,
   socialLinks,
-  WHATSAPP_NUMBER,
 } from '../lib/site-config';
 import { photos } from '../lib/images';
 import { NILE_DUSK } from '../lib/tokens';
@@ -54,12 +53,12 @@ const faqItems = [
   {
     question: 'Where do sessions take place?',
     answer:
-      'In Egypt, based in Al Maţarīyah, Ad Daqahlīyah. Call or WhatsApp to confirm location and availability for your horse.',
+      'In Egypt, based in Al Maţarīyah, Ad Daqahlīyah. Call to confirm location and availability for your horse.',
   },
   {
     question: 'How do I book?',
     answer:
-      'Use WhatsApp or phone (+20 122 060 1781), or send an enquiry on the contact page. We will arrange a time that works for you and your horse.',
+      'Call +20 122 060 1781, or send an enquiry on the contact page. We will arrange a time that works for you and your horse.',
   },
 ];
 ---
@@ -109,7 +108,6 @@ const faqItems = [
         addressCountry: 'EG',
       },
       areaServed: 'Egypt',
-      sameAs: [`https://wa.me/${WHATSAPP_NUMBER}`],
     },
     {
       '@type': 'FAQPage',
@@ -232,7 +230,7 @@ const faqItems = [
 
   <CTABlock
     heading="Bring your horse into quieter work."
-    description="Tell us about your Arabian and what you want to change. We will reply by phone or WhatsApp to arrange a session."
+    description="Tell us about your Arabian and what you want to change. We will reply by phone to arrange a session."
     primaryButton={{ text: 'Book a session', href: '/contact/' }}
     secondaryButton={{ text: 'Our approach', href: '/about/' }}
   />
